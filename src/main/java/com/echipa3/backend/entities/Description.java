@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 @Table(name = "descriptions")
 @javax.persistence.Entity
-//@AttributeOverride(name = "announcement_id", column = @Column(name="description_id"))
+@AttributeOverride(name = "announcement_id", column = @Column(name="description_id"))
 public class Description{
 
     @Id
@@ -40,6 +40,11 @@ public class Description{
     public void setText(String text) {
         this.text = text;
     }
+
+    //public Announcement getAnnouncement() { return this.announcement; }
+
+    //public void setAnnouncement(Announcement announcement) { this.announcement = announcement; }
+
 
     public String toString(){
         String output = "";

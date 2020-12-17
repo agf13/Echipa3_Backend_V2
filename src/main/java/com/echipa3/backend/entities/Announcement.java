@@ -15,7 +15,7 @@ public class Announcement implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_gen")
-            @Column(name = "announcement_id")
+    @Column(name = "announcement_id")
     Long id;
 
     @Column(name = "title")
