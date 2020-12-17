@@ -4,7 +4,7 @@ import com.echipa3.backend.entities.Tag;
 
 import java.util.List;
 
-public interface IServiceTag {
+public interface ITagService {
     public List<Tag> getAll();
 
     public Tag getById(Long id);

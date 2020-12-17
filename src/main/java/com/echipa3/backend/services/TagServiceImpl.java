@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ServiceTagImpl implements IServiceTag{
+public class TagServiceImpl implements ITagService {
 
     @Autowired
     IRepoTag repository;
