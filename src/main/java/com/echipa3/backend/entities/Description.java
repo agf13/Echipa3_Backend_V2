@@ -20,12 +20,9 @@ public class Description{
     @OneToOne(mappedBy = "description")
     private Announcement announcement;
 
-    public Description(){
-        super();
-    }
+    public Description(){ }
 
     public Description(String text){
-        super();
         this.text = text;
     }
 

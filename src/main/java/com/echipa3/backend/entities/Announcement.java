@@ -23,8 +23,12 @@ public class Announcement implements Serializable {
     private String title;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "description_id", referencedColumnName = "description_id")
+    @JoinColumn(name = "description_id", referencedColumnName = "description_id", insertable = false, updatable = false)
     private Description description;
+
+    @Column(name = "description_id")
+    @NotNull
+    Long descriptionId;
 
     @Column(name = "short_description")
     @NotNull
@@ -56,18 +60,18 @@ public class Announcement implements Serializable {
     private List<Tag> tags;
 
 
-    public Announcement(Long id, String title, Description description, String shortDescription, Date publishedDate, Integer importance, boolean approvedForPublishing, String link, List<Tag> tags) {
-//        super(id);
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.shortDescription = shortDescription;
-        this.publishedDate = publishedDate;
-        this.importance = importance;
-        this.approvedForPublishing = approvedForPublishing;
-        this.link = link;
-        this.tags = tags;
-    }
+//    public Announcement(Long id, String title, Description description, String shortDescription, Date publishedDate, Integer importance, boolean approvedForPublishing, String link, List<Tag> tags) {
+////        super(id);
+//        this.id = id;
+//        this.title = title;
+//        this.description = description;
+//        this.shortDescription = shortDescription;
+//        this.publishedDate = publishedDate;
+//        this.importance = importance;
+//        this.approvedForPublishing = approvedForPublishing;
+//        this.link = link;
+//        this.tags = tags;
+//    }
 
 //    public Announcement(Long id) {
 //        super(id);
@@ -81,6 +85,7 @@ public class Announcement implements Serializable {
 
     public void setId(Long id){ this.id = id; }
 
+
     public String getTitle() {
         return title;
     }
@@ -89,61 +94,41 @@ public class Announcement implements Serializable {
         this.title = title;
     }
 
-    public Description getDescription() {
-        return description;
-    }
 
-    public void setDescription(Description description) {
-        this.description = description;
-    }
+    public Long getDescriptionId() { return this.descriptionId; }
 
-    public String getShortDescription() {
-        return shortDescription;
-    }
+    public void setDescriptionId(Long descriptionId) { this.descriptionId = descriptionId; }
 
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
 
-    public Date getPublishedDate() {
-        return publishedDate;
-    }
+    public Description getDescription() { return description; }
 
-    public void setPublishedDate(Date publishedDate) {
-        this.publishedDate = publishedDate;
-    }
+    public void setDescription(Description description) { this.description = description; }
 
-    public Integer getImportance() {
-        return importance;
-    }
 
-    public void setImportance(Integer importance) {
-        this.importance = importance;
-    }
+    public String getShortDescription() { return this.shortDescription; }
 
-    public boolean isApprovedForPublishing() {
-        return approvedForPublishing;
-    }
+    public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
 
-    public void setApprovedForPublishing(boolean approvedForPublishing) {
-        this.approvedForPublishing = approvedForPublishing;
-    }
 
-    public String getLink() {
-        return link;
-    }
+    public Date getPublishedDate() { return publishedDate; }
 
-    public void setLink(String link) {
-        this.link = link;
-    }
+    public void setPublishedDate(Date publishedDate) { this.publishedDate = publishedDate; }
 
-    public List<Tag> getTags() {
-        return tags;
-    }
+    public Integer getImportance() { return importance; }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
+    public void setImportance(Integer importance) { this.importance = importance; }
+
+    public boolean isApprovedForPublishing() { return approvedForPublishing;}
+
+    public void setApprovedForPublishing(boolean approvedForPublishing) { this.approvedForPublishing = approvedForPublishing; }
+
+    public String getLink() { return link; }
+
+    public void setLink(String link) { this.link = link;}
+
+    public List<Tag> getTags() {return tags;}
+
+    public void setTags(List<Tag> tags) {this.tags = tags; }
 
     @Override
     public String toString() {
