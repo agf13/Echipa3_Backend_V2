@@ -2,11 +2,12 @@ package com.echipa3.backend.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Table(name = "descriptions")
 @javax.persistence.Entity
 @AttributeOverride(name = "announcement_id", column = @Column(name="description_id"))
-public class Description{
+public class Description implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_gen")

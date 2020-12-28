@@ -1,5 +1,6 @@
 package com.echipa3.backend.entities;
 
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
@@ -7,8 +8,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "internships")
-public class Internship implements Serializable {
+@Table(name = "jobs")
+public class Job implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "announcement_id", referencedColumnName = "announcement_id", insertable = false, updatable = false)
@@ -16,26 +17,17 @@ public class Internship implements Serializable {
 
     @Id
     @NotNull
-    //@GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_gen")
     @Column(name = "announcement_id")
     private Long id;
 
-    @Column(name = "start_date")
-    private Date startDate;
-
     @Column(name = "requirements")
-    private String requirments;
-
-    @Column(name = "no_available_positions")
-    private int numberAvailablePositions;
+    private String requirements;
 
     @Column(name = "limit_date")
     private Date limitDate;
 
 
-
-    public Internship(){}
-
+    public Job() {}
 
 
     public Announcement getAnnouncement() {
@@ -50,28 +42,12 @@ public class Internship implements Serializable {
         this.id = id;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public String getRequirements() {
+        return requirements;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getRequirments() {
-        return requirments;
-    }
-
-    public void setRequirments(String requirments) {
-        this.requirments = requirments;
-    }
-
-    public int getNumberAvailablePositions() {
-        return numberAvailablePositions;
-    }
-
-    public void setNumberAvailablePositions(int numberAvailablePositions) {
-        this.numberAvailablePositions = numberAvailablePositions;
+    public void setRequirements(String requirements) {
+        this.requirements = requirements;
     }
 
     public Date getLimitDate() {
@@ -84,12 +60,10 @@ public class Internship implements Serializable {
 
     @Override
     public String toString() {
-        return "Internship{" +
+        return "Job{" +
                 "announcement=" + announcement +
                 ", id=" + id +
-                ", startDate=" + startDate +
-                ", requirments='" + requirments + '\'' +
-                ", numberAvailablePositions=" + numberAvailablePositions +
+                ", requirements='" + requirements + '\'' +
                 ", limitDate=" + limitDate +
                 '}';
     }

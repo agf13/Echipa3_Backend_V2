@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class InternshipImpl implements IInternshipService{
+public class InternshipServiceImpl implements IInternshipService{
 
     @Autowired
     IRepoInternship repository;

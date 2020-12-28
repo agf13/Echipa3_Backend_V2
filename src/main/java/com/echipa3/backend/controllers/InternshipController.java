@@ -16,7 +16,7 @@ import java.util.List;
 public class InternshipController {
 
     @Autowired
-    IInternshipService service;
+    private IInternshipService service;
 
     @PostMapping()
     public Internship save(@RequestBody Internship internship){
