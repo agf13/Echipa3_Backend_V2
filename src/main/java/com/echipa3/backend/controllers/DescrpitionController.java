@@ -10,19 +10,19 @@ import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping(value = "/descriptioncontroller")
+@RequestMapping(value = "/descriptions")
 public class DescrpitionController {
 
     @Autowired
     IDescriptionService service;
 
-    @PostMapping("/save")
+    @PostMapping()
     public Description save(@RequestBody Description description){
         service.saveOrUpdate(description);
         return description;
     }
 
-    @GetMapping("/list")
+    @GetMapping()
     public List<Description> list(){
         return service.getAll();
     }

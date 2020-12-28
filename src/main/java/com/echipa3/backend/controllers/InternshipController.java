@@ -1,6 +1,8 @@
 package com.echipa3.backend.controllers;
 
+import com.echipa3.backend.entities.Internship;
 import com.echipa3.backend.entities.Tag;
+import com.echipa3.backend.services.IInternshipService;
 import com.echipa3.backend.services.ITagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -10,20 +12,20 @@ import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping(value = "/tags")
-public class TagController {
+@RequestMapping(value = "/internships")
+public class InternshipController {
 
     @Autowired
-    ITagService service;
+    IInternshipService service;
 
     @PostMapping()
-    public Tag save(@RequestBody Tag tag){
-        service.saveOrUpdate(tag);
-        return tag;
+    public Internship save(@RequestBody Internship internship){
+        service.saveOrUpdate(internship);
+        return internship;
     }
 
     @GetMapping()
-    public List<Tag> list(){
+    public List<Internship> list(){
         return service.getAll();
     }
 }

@@ -10,19 +10,19 @@ import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping(value = "/announcementcontroller")
+@RequestMapping(value = "/announcements")
 public class AnnouncementController {
 
     @Autowired
     IAnnouncementService service;
 
-    @PostMapping("/save")
+    @PostMapping()
     public Announcement save(@RequestBody Announcement announcement){
         service.saveOrUpdate(announcement);
         return announcement;
     }
 
-    @GetMapping("/list")
+    @GetMapping()
     public List<Announcement> list(){
         return service.getAll();
     }
