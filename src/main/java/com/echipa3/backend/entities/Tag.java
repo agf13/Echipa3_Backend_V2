@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Table(name = "tags")
 @javax.persistence.Entity
@@ -21,8 +22,10 @@ public class Tag implements Serializable {
     @NotNull
     private String text;
 
-    @ManyToMany
-    private List<Announcement> announcementList;
+//    @ManyToMany
+//    private Set<Announcement> announcementList;
+    @OneToMany(mappedBy = "tagObject")
+    private Set<AnnouncementTag> announcementTagsList;
 
     public Tag(){
         super();
@@ -45,12 +48,20 @@ public class Tag implements Serializable {
         this.text = text;
     }
 
+    public Set<AnnouncementTag> getAnnouncementTagsList() {
+        return announcementTagsList;
+    }
+
+    public void setAnnouncementTagsList(Set<AnnouncementTag> announcementTagsList) {
+        this.announcementTagsList = announcementTagsList;
+    }
+
     @Override
     public String toString() {
         return "Tag{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
-                ", announcementList=" + announcementList +
+                ", announcementList=" + announcementTagsList +
                 '}';
     }
 }

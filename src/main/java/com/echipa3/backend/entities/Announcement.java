@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 //@MappedSuperclass
 @Entity
@@ -49,15 +50,17 @@ public class Announcement implements Serializable {
     @Column(name = "link")
     private String link;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "announcementstags",
-            joinColumns = {
-                    @JoinColumn(name = "announcement_id", referencedColumnName = "announcement_id",
-                            nullable = false, updatable = false)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "tag_id", referencedColumnName = "tag_id",
-                            nullable = false, updatable = false)})
-    private List<Tag> tags;
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+//    @JoinTable(name = "announcementstags",
+//            joinColumns = {
+//                    @JoinColumn(name = "announcement_id", referencedColumnName = "announcement_id",
+//                            nullable = false, updatable = false)},
+//            inverseJoinColumns = {
+//                    @JoinColumn(name = "tag_id", referencedColumnName = "tag_id",
+//                            nullable = false, updatable = false)})
+//    private Set<Tag> tagList;
+    @OneToMany(mappedBy = "announcementObject")
+    private Set<AnnouncementTag> announcementTagsList;
 
 
 //    public Announcement(Long id, String title, Description description, String shortDescription, Date publishedDate, Integer importance, boolean approvedForPublishing, String link, List<Tag> tags) {
@@ -126,9 +129,16 @@ public class Announcement implements Serializable {
 
     public void setLink(String link) { this.link = link;}
 
-    public List<Tag> getTags() {return tags;}
+//    public List<Tag> getTags() {return tags;}
+//    public void setTags(List<Tag> tags) {this.tags = tags; }
 
-    public void setTags(List<Tag> tags) {this.tags = tags; }
+    public Set<AnnouncementTag> getAnnouncementTagsList() {
+        return announcementTagsList;
+    }
+
+    public void setAnnouncementTagsList(Set<AnnouncementTag> announcementTagsList) {
+        this.announcementTagsList = announcementTagsList;
+    }
 
     @Override
     public String toString() {
@@ -141,7 +151,7 @@ public class Announcement implements Serializable {
                 ", importance=" + importance +
                 ", approvedForPublishing=" + approvedForPublishing +
                 ", link='" + link + '\'' +
-                ", tags=" + tags +
+                ", tags=" + announcementTagsList +
                 '}';
     }
 }
