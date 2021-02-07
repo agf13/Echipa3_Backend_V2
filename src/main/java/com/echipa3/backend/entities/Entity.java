@@ -11,8 +11,8 @@ import javax.persistence.MappedSuperclass;
 public class Entity {
 
     @Id
-    @Column(name = "announcement_id", nullable = false, unique = true, updatable = false, length = 100)
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "announcement_id")
     private Long id;
 
 

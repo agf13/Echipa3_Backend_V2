@@ -1,12 +1,10 @@
 package com.echipa3.backend.entities;
 
-import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.validation.constraints.NegativeOrZero;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 //@MappedSuperclass
@@ -59,8 +57,12 @@ public class Announcement implements Serializable {
 //                    @JoinColumn(name = "tag_id", referencedColumnName = "tag_id",
 //                            nullable = false, updatable = false)})
 //    private Set<Tag> tagList;
-    @OneToMany(mappedBy = "announcementObject")
-    private Set<AnnouncementTag> announcementTagsList;
+    @ManyToMany
+    @JoinTable(
+            name = "announcementstags",
+            joinColumns = @JoinColumn(name = "announcement_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private Set<Tag> tags;
 
 
 //    public Announcement(Long id, String title, Description description, String shortDescription, Date publishedDate, Integer importance, boolean approvedForPublishing, String link, List<Tag> tags) {
@@ -132,13 +134,13 @@ public class Announcement implements Serializable {
 //    public List<Tag> getTags() {return tags;}
 //    public void setTags(List<Tag> tags) {this.tags = tags; }
 
-    public Set<AnnouncementTag> getAnnouncementTagsList() {
-        return announcementTagsList;
-    }
-
-    public void setAnnouncementTagsList(Set<AnnouncementTag> announcementTagsList) {
-        this.announcementTagsList = announcementTagsList;
-    }
+//    public Set<AnnouncementTag> getAnnouncementTagsList() {
+//        return announcementTagsList;
+//    }
+//
+//    public void setAnnouncementTagsList(Set<AnnouncementTag> announcementTagsList) {
+//        this.announcementTagsList = announcementTagsList;
+//    }
 
     @Override
     public String toString() {
@@ -151,7 +153,7 @@ public class Announcement implements Serializable {
                 ", importance=" + importance +
                 ", approvedForPublishing=" + approvedForPublishing +
                 ", link='" + link + '\'' +
-                ", tags=" + announcementTagsList +
+                ", tags=" + tags +
                 '}';
     }
 }
