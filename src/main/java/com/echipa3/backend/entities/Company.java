@@ -1,8 +1,9 @@
 package com.echipa3.backend.entities;
 
-import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "companies")
@@ -13,7 +14,6 @@ public class Company implements Serializable {
     @Column(name = "company_id")
     Long companyId;
 
-
     @Column(name = "username")
     String username;
 
@@ -22,6 +22,9 @@ public class Company implements Serializable {
 
     @Column(name = "name")
     String name;
+
+    @OneToMany(mappedBy = "company")
+    List<Announcement> announcements;
 
 
     public Company() {}

@@ -25,6 +25,10 @@ public class Announcement implements Serializable {
     @JoinColumn(name = "description_id", referencedColumnName = "description_id", insertable = false, updatable = false)
     private Description description;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id", referencedColumnName = "image_id", insertable = false, updatable = false)
+    private Image image;
+
     @Column(name = "description_id")
     @NotNull
     Long descriptionId;
@@ -64,6 +68,9 @@ public class Announcement implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    Company company;
 
 //    public Announcement(Long id, String title, Description description, String shortDescription, Date publishedDate, Integer importance, boolean approvedForPublishing, String link, List<Tag> tags) {
 ////        super(id);

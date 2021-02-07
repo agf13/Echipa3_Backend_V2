@@ -1,9 +1,7 @@
 package com.echipa3.backend.entities;
 
-import javax.persistence.Column;
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -18,6 +16,9 @@ public class Image implements Serializable {
 
     @Column(name = "image_url")
     private String imageUrl;
+
+    @OneToOne(mappedBy = "image")
+    private Announcement announcement;
 
     public Image() {
     }
