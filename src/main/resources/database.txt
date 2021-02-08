@@ -1,5 +1,7 @@
 CREATE DATABASE practica3;
 
+CREATE SEQUENCE seq_gen START 1;
+
 CREATE TABLE Images(
                        image_id BIGSERIAL PRIMARY KEY,
                        image_url VARCHAR(200)

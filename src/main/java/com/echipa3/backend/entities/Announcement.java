@@ -1,5 +1,7 @@
 package com.echipa3.backend.entities;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -72,6 +74,10 @@ public class Announcement implements Serializable {
     @JoinColumn(name = "company_id")
     Company company;
 
+    @Column(name = "company_id")
+    @NotNull
+    Long companyId;
+
 //    public Announcement(Long id, String title, Description description, String shortDescription, Date publishedDate, Integer importance, boolean approvedForPublishing, String link, List<Tag> tags) {
 ////        super(id);
 //        this.id = id;
@@ -91,6 +97,38 @@ public class Announcement implements Serializable {
 
     public Announcement(){
 
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public Long getId(){ return this.id; }
