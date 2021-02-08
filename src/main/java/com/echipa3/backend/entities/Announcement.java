@@ -1,7 +1,5 @@
 package com.echipa3.backend.entities;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,6 +28,10 @@ public class Announcement implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id", referencedColumnName = "image_id", insertable = false, updatable = false)
     private Image image;
+
+    @Column(name = "image_id")
+    @NotNull
+    Long imageId;
 
     @Column(name = "description_id")
     @NotNull
@@ -70,8 +72,8 @@ public class Announcement implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "company_id", referencedColumnName = "company_id", insertable = false, updatable = false)
     Company company;
 
     @Column(name = "company_id")
@@ -99,10 +101,6 @@ public class Announcement implements Serializable {
 
     }
 
-    public Long getCompanyId() {
-        return companyId;
-    }
-
     public Image getImage() {
         return image;
     }
@@ -127,6 +125,26 @@ public class Announcement implements Serializable {
         this.company = company;
     }
 
+    public Long getDescriptionId() {
+        return descriptionId;
+    }
+
+    public void setDescriptionId(Long descriptionId) {
+        this.descriptionId = descriptionId;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public Long getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
+    }
+
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
@@ -143,12 +161,6 @@ public class Announcement implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
-
-
-    public Long getDescriptionId() { return this.descriptionId; }
-
-    public void setDescriptionId(Long descriptionId) { this.descriptionId = descriptionId; }
-
 
     public Description getDescription() { return description; }
 

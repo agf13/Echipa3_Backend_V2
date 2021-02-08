@@ -22,7 +22,8 @@ public class InternshipServiceImpl implements IInternshipService{
     public Internship getById(Long id) { return repository.findById(id).get(); }
 
     @Override
-    public void saveOrUpdate(Internship internship) { repository.save(internship); }
+    public void saveOrUpdate(Internship internship) {
+        repository.save(internship); }
 
     @Override
     public void delete(Long id) { repository.deleteById(id); }

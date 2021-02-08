@@ -1,13 +1,12 @@
 package com.echipa3.backend.controllers;
 
 import com.echipa3.backend.entities.Internship;
-import com.echipa3.backend.entities.Tag;
 import com.echipa3.backend.services.IInternshipService;
-import com.echipa3.backend.services.ITagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -20,6 +19,8 @@ public class InternshipController {
 
     @PostMapping()
     public Internship save(@RequestBody Internship internship){
+        internship.setLimitDate(new Date());
+        internship.setStartDate(new Date());
         service.saveOrUpdate(internship);
         return internship;
     }
