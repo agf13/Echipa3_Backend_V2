@@ -36,9 +36,4 @@ public class AnnouncementServiceImpl implements IAnnouncementService{
     public void delete(Long id) {
         repository.deleteById(id);
     }
-
-    @Override
-    public void addTag(Tag tag){
-
-    }
 }
