@@ -12,4 +12,5 @@ public class SecurityConstants {
     public static final String INTERNSHIPS_URL = "/internships**";
     public static final String JOBS_URL = "/jobs**";
     public static final String OTHERS_URL = "/others**";
+    public static final String COMPANIES_URL = "/companies**";
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public class Company implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_gen")
+    //@GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_gen")
     @Column(name = "company_id")
     Long companyId;
 

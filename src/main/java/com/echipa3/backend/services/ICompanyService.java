@@ -11,7 +11,7 @@ public interface ICompanyService {
 
     public Company getById(Long id);
 
-    public void saveOrUpdate(Company company);
+    public Company saveOrUpdate(Company company);
 
     public void delete(Long id);
 }
