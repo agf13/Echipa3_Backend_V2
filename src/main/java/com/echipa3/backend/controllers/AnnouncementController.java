@@ -1,12 +1,17 @@
 package com.echipa3.backend.controllers;
 
+import com.echipa3.backend.dtos.AnnouncementDto;
 import com.echipa3.backend.entities.Announcement;
+import com.echipa3.backend.entities.Tag;
 import com.echipa3.backend.services.IAnnouncementService;
+import com.echipa3.backend.services.ITagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @EnableAutoConfiguration
@@ -15,28 +20,43 @@ public class AnnouncementController {
 
     @Autowired
     IAnnouncementService service;
+    @Autowired
+    ITagService tagService;
 
-//    @PostMapping()
-//    public Announcement save(@RequestBody AnnouncementDTO announcementDto){
-//        Announcement announcement = new Announcement();
-//        announcement.setTitle(announcementDto.getTitle());
-//        announcement.setShortDescription(announcementDto.getShortDescription());
-//        announcement.setCompanyId(1L);
-//        announcement.setDescriptionId(1L);
-//        announcement.setPublishedDate(new Date());
-//        announcement.setImportance(announcementDto.getImportance());
-//        announcement.setApprovedForPublishing(announcementDto.getApprovedForPublishing());
-//        announcement.setImageId(1L);
-//        //announcement.setApprovedForPublishing(announcementDto.getApprovedForPublishing());
-//        service.saveOrUpdate(announcement);
-//        return announcement;
-//    }
-
-
+    /*
+    {
+    "imageId":1,
+    "descriptionId":1,
+    "companyId":12,
+    "title":"titlu",
+    "shortDescription":"abcd",
+    "publishedDate": "2020-02-02",
+    "link": "link",
+    "tags": [1,2,3]
+}
+     */
     @PostMapping()
-    public Announcement save(@RequestBody Announcement announcement){
-        service.saveOrUpdate(announcement);
-        return announcement;
+    public Announcement save(@RequestBody AnnouncementDto announcementDto){
+        Announcement announcement = new Announcement();
+        announcement.setTitle(announcementDto.getTitle());
+        announcement.setDescriptionId(announcementDto.getDescriptionId());
+        announcement.setImageId(announcementDto.getImageId());
+        announcement.setShortDescription(announcementDto.getShortDescription());
+        announcement.setPublishedDate(announcementDto.getPublishedDate());
+        announcement.setLink(announcementDto.getLink());
+        announcement.setCompanyId(announcementDto.getCompanyId());
+        if(!announcementDto.isPinned()) {
+            announcement.setPinned(false);
+        }
+        if(!announcementDto.isApprovedForPublishing()) {
+            announcement.setApprovedForPublishing(false);
+        }
+        Set<Tag> tags = new HashSet<>();
+        for(Long tag: announcementDto.getTags()){
+            tags.add(tagService.getById(tag));
+        }
+        announcement.setTags(tags);
+        return service.saveOrUpdate(announcement);
     }
 
     @GetMapping()

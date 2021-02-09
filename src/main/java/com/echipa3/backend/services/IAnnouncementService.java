@@ -9,7 +9,7 @@ public interface IAnnouncementService {
 
     public Announcement getById(Long id);
 
-    public void saveOrUpdate(Announcement entity);
+    public Announcement saveOrUpdate(Announcement entity);
 
     public void delete(Long id);
 }
