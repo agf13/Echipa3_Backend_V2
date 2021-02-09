@@ -176,9 +176,9 @@ public class Announcement implements Serializable {
 
     public void setPublishedDate(Date publishedDate) { this.publishedDate = publishedDate; }
 
-    public boolean getImportance() { return isPinned; }
+    public boolean getIsPinned() { return isPinned; }
 
-    public void setImportance(boolean isPinned) { this.isPinned = isPinned; }
+    public void setIsPinned(boolean isPinned) { this.isPinned = isPinned; }
 
     public boolean isApprovedForPublishing() { return approvedForPublishing;}
 
