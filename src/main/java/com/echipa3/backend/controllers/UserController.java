@@ -1,9 +1,6 @@
 package com.echipa3.backend.controllers;
 
-import com.amazonaws.services.fms.model.App;
 import com.echipa3.backend.dtos.ApplicationUserDto;
-import com.echipa3.backend.entities.ApplicationUser;
-import com.echipa3.backend.entities.Company;
 import com.echipa3.backend.services.ICompanyService;
 import com.echipa3.backend.services.IUserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,7 +24,7 @@ public class UserController {
 
     @PostMapping("/sign-up")
     public void signUp(@RequestBody ApplicationUserDto applicationUserDto) {
-        ApplicationUser applicationUser = new ApplicationUser();
+        /*ApplicationUser applicationUser = new ApplicationUser();
         applicationUser.setUsername(applicationUserDto.getUsername());
         applicationUser.setPassword(bCryptPasswordEncoder.encode(applicationUserDto.getPassword()));
         ApplicationUser newUser = userService.saveOrUpdate(applicationUser);
@@ -36,6 +33,6 @@ public class UserController {
         company.setName(applicationUserDto.getName());
         company.setPhoneNumber(applicationUserDto.getPhoneNumber());
         company.setEmail(applicationUserDto.getEmail());
-        companyService.saveOrUpdate(company);
+        companyService.saveOrUpdate(company);*/
     }
 }
