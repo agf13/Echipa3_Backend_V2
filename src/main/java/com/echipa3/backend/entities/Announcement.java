@@ -45,9 +45,9 @@ public class Announcement implements Serializable {
     @NotNull
     private Date publishedDate;
 
-    @Column(name = "importance")
+    @Column(name = "is_pinned")
     @NotNull
-    private Integer importance;
+    private boolean isPinned;
 
     @Column(name = "approved_for_publishing")
     @NotNull
@@ -176,9 +176,9 @@ public class Announcement implements Serializable {
 
     public void setPublishedDate(Date publishedDate) { this.publishedDate = publishedDate; }
 
-    public Integer getImportance() { return importance; }
+    public boolean getImportance() { return isPinned; }
 
-    public void setImportance(Integer importance) { this.importance = importance; }
+    public void setImportance(boolean isPinned) { this.isPinned = isPinned; }
 
     public boolean isApprovedForPublishing() { return approvedForPublishing;}
 
@@ -207,7 +207,7 @@ public class Announcement implements Serializable {
                 ", description=" + description +
                 ", shortDescription='" + shortDescription + '\'' +
                 ", publishedDate=" + publishedDate +
-                ", importance=" + importance +
+                ", isPinned=" + isPinned +
                 ", approvedForPublishing=" + approvedForPublishing +
                 ", link='" + link + '\'' +
                 ", tags=" + tags +

@@ -126,3 +126,10 @@ ADD email varchar(100);
 ALTER TABLE companies
 ADD is_gold boolean;
 
+
+--changeing the field 'importance' form announcements to 'isPinned'
+ALTER TABLE Announcements
+DROP COLUMN importance;
+
+ALTER TABLE announcements
+ADD is_pinned boolean
