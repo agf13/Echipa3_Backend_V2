@@ -14,35 +14,30 @@ public class Company implements Serializable {
     @Column(name = "company_id")
     Long companyId;
 
-    @Column(name = "username")
-    String username;
-
-    @Column(name = "password")
-    String password;
-
     @Column(name = "name")
     String name;
 
     @OneToMany(mappedBy = "company")
     List<Announcement> announcements;
 
+    @Column(name = "telephone")
+    String telephone;
+
+    @Column(name = "email")
+    String email;
+
+    @Column(name = "is_gold")
+    boolean is_gold;
+
 
     public Company() {}
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getCompanyId() {
@@ -53,21 +48,48 @@ public class Company implements Serializable {
         this.companyId = companyId;
     }
 
-    public String getName() {
-        return name;
+    public List<Announcement> getAnnouncements() {
+        return announcements;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAnnouncements(List<Announcement> announcements) {
+        this.announcements = announcements;
     }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isIs_gold() {
+        return is_gold;
+    }
+
+    public void setIs_gold(boolean is_gold) {
+        this.is_gold = is_gold;
+    }
+
 
     @Override
     public String toString() {
-        return "Admin{" +
+        return "Company{" +
                 "companyId=" + companyId +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
+                ", announcements=" + announcements +
+                ", telephone='" + telephone + '\'' +
+                ", email='" + email + '\'' +
+                ", is_gold=" + is_gold +
                 '}';
     }
 }

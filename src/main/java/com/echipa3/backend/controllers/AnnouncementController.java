@@ -33,6 +33,8 @@ public class AnnouncementController {
 //        service.saveOrUpdate(announcement);
 //        return announcement;
 //    }
+
+
     @PostMapping()
     public Announcement save(@RequestBody Announcement announcement){
         service.saveOrUpdate(announcement);
@@ -43,4 +45,6 @@ public class AnnouncementController {
     public List<Announcement> list(){
         return service.getAll();
     }
+
+
 }

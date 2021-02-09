@@ -107,3 +107,22 @@ CREATE TABLE Users(
                       password VARCHAR(1000)
 );
 
+
+
+--modifying company table:  removing username and password
+--                          adding telephone, email, isGold
+ALTER TABLE companies
+DROP COLUMN username;
+
+ALTER TABLE companies
+DROP COLUMN password;
+
+ALTER TABLE companies
+ADD telephone varchar(20);
+
+ALTER TABLE companies
+ADD email varchar(100);
+
+ALTER TABLE companies
+ADD is_gold boolean;
+

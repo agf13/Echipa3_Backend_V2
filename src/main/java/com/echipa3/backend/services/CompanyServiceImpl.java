@@ -1,5 +1,6 @@
 package com.echipa3.backend.services;
 
+import com.echipa3.backend.entities.Announcement;
 import com.echipa3.backend.entities.Company;
 import com.echipa3.backend.repositories.IRepoCompany;
 import com.echipa3.backend.repositories.IRepoCourse;
@@ -19,6 +20,13 @@ public class CompanyServiceImpl implements ICompanyService{
     @Override
     public List<Company> getAll() {
         return (List<Company>)repository.findAll();
+    }
+
+    @Override
+    public List<Announcement> getAnnouncements(Long companyId) {
+        Company company = repository.findById(companyId).get();
+        List<Announcement> announcementList = company.getAnnouncements();
+        return announcementList;
     }
 
     @Override

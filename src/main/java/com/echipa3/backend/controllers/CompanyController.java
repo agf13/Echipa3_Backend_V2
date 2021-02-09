@@ -23,6 +23,11 @@ public class CompanyController {
         return company;
     }
 
+    @GetMapping(value = "/get")
+    public List<Announcement> getAnnouncements(@RequestParam Long companyId){
+        return service.getAnnouncements(companyId);
+    }
+
     @GetMapping()
     public List<Company> list(){
         return service.getAll();

@@ -117,9 +117,9 @@ public class Announcement implements Serializable {
         this.tags = tags;
     }
 
-    public Company getCompany() {
-        return company;
-    }
+//    public Company getCompany() {
+//        return company;
+//    }
 
     public void setCompany(Company company) {
         this.company = company;
