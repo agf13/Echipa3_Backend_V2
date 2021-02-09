@@ -12,7 +12,7 @@ public interface IUserService {
 
     public ApplicationUser getByUsername(String username);
 
-    public void saveOrUpdate(ApplicationUser ApplicationUser);
+    public ApplicationUser saveOrUpdate(ApplicationUser ApplicationUser);
 
     public void delete(Long id);
 }
