@@ -1,6 +1,6 @@
 package com.echipa3.backend.controllers;
 
-import com.echipa3.backend.dtos.AnnouncementDto;
+import com.echipa3.backend.dtos.AnnouncementSaveDto;
 import com.echipa3.backend.entities.Announcement;
 import com.echipa3.backend.entities.Tag;
 import com.echipa3.backend.services.IAnnouncementService;
@@ -36,7 +36,7 @@ public class AnnouncementController {
 }
      */
     @PostMapping()
-    public Announcement save(@RequestBody AnnouncementDto announcementDto){
+    public Announcement save(@RequestBody AnnouncementSaveDto announcementDto){
         Announcement announcement = new Announcement();
         announcement.setTitle(announcementDto.getTitle());
         announcement.setDescriptionId(announcementDto.getDescriptionId());
@@ -63,6 +63,4 @@ public class AnnouncementController {
     public List<Announcement> list(){
         return service.getAll();
     }
-
-
 }

@@ -3,7 +3,7 @@ package com.echipa3.backend.dtos;
 import java.util.Date;
 import java.util.List;
 
-public class AnnouncementDto {
+public class AnnouncementSaveDto {
 
     private String title;
     Long imageId;
@@ -16,7 +16,7 @@ public class AnnouncementDto {
     private List<Long> tags;
     Long companyId;
 
-    public AnnouncementDto(String title, Long imageId, Long descriptionId, String shortDescription, Date publishedDate, boolean isPinned, boolean approvedForPublishing, String link, List<Long> tags, Long companyId) {
+    public AnnouncementSaveDto(String title, Long imageId, Long descriptionId, String shortDescription, Date publishedDate, boolean isPinned, boolean approvedForPublishing, String link, List<Long> tags, Long companyId) {
         this.title = title;
         this.imageId = imageId;
         this.descriptionId = descriptionId;
@@ -29,7 +29,7 @@ public class AnnouncementDto {
         this.companyId = companyId;
     }
 
-    public AnnouncementDto() {
+    public AnnouncementSaveDto() {
     }
 
     public String getTitle() {
