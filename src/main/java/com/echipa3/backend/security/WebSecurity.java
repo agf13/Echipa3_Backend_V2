@@ -13,7 +13,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import static com.echipa3.backend.security.SecurityConstants.SIGN_UP_URL;
+import static com.echipa3.backend.security.SecurityConstants.*;
 
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
@@ -29,6 +29,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+                .antMatchers(HttpMethod.GET, ANNOUNCEMENTS_URL).permitAll()
+                .antMatchers(HttpMethod.GET, CONTESTS_URL).permitAll()
+                .antMatchers(HttpMethod.GET, COURSES_URL).permitAll()
+                .antMatchers(HttpMethod.GET, INTERNSHIPS_URL).permitAll()
+                .antMatchers(HttpMethod.GET, JOBS_URL).permitAll()
+                .antMatchers(HttpMethod.GET, OTHERS_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
