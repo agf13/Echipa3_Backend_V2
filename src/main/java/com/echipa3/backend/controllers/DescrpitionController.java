@@ -1,7 +1,7 @@
 package com.echipa3.backend.controllers;
 
-import com.echipa3.backend.entities.Tag;
-import com.echipa3.backend.services.ITagService;
+import com.echipa3.backend.entities.Description;
+import com.echipa3.backend.services.IDescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
@@ -10,20 +10,20 @@ import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping(value = "/tags")
-public class TagController {
+@RequestMapping(value = "/descriptions")
+public class DescrpitionController {
 
     @Autowired
-    ITagService service;
+    IDescriptionService service;
 
     @PostMapping()
-    public Tag save(@RequestBody Tag tag){
-        service.saveOrUpdate(tag);
-        return tag;
+    public Description save(@RequestBody Description description){
+        service.saveOrUpdate(description);
+        return description;
     }
 
     @GetMapping()
-    public List<Tag> list(){
+    public List<Description> list(){
         return service.getAll();
     }
 }

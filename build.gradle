@@ -17,6 +17,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
 //    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
@@ -30,6 +31,17 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
+
+    // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk
+    compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.941'
+
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-resource-server
+    compile group: 'org.springframework.security', name: 'spring-security-oauth2-resource-server', version: '5.4.1'
+
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-jose
+    compile group: 'org.springframework.security', name: 'spring-security-oauth2-jose', version: '5.4.1'
+
+    compile("com.auth0:java-jwt:3.4.0")
 }
 
 test {

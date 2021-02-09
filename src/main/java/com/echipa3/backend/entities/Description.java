@@ -2,11 +2,12 @@ package com.echipa3.backend.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Table(name = "descriptions")
 @javax.persistence.Entity
-//@AttributeOverride(name = "announcement_id", column = @Column(name="description_id"))
-public class Description{
+@AttributeOverride(name = "announcement_id", column = @Column(name="description_id"))
+public class Description implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_gen")
@@ -20,12 +21,9 @@ public class Description{
     @OneToOne(mappedBy = "description")
     private Announcement announcement;
 
-    public Description(){
-        super();
-    }
+    public Description(){ }
 
     public Description(String text){
-        super();
         this.text = text;
     }
 
@@ -40,6 +38,11 @@ public class Description{
     public void setText(String text) {
         this.text = text;
     }
+
+    //public Announcement getAnnouncement() { return this.announcement; }
+
+    //public void setAnnouncement(Announcement announcement) { this.announcement = announcement; }
+
 
     public String toString(){
         String output = "";

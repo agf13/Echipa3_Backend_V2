@@ -1,0 +1,135 @@
+CREATE DATABASE practica3;
+
+CREATE SEQUENCE seq_gen START 1;
+
+CREATE TABLE Images(
+                       image_id BIGSERIAL PRIMARY KEY,
+                       image_url VARCHAR(200)
+);
+
+CREATE TABLE Companies (
+                           company_id BIGSERIAL PRIMARY KEY ,
+                           username VARCHAR(50) NOT NULL,
+                           password VARCHAR(1000) NOT NULL,
+                           name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Admins (
+                        admin_id BIGSERIAL PRIMARY KEY,
+                        username VARCHAR(50) NOT NULL,
+                        password VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Descriptions(
+                             description_id BIGSERIAL PRIMARY KEY,
+                             text VARCHAR(10000) NOT NULL
+);
+
+CREATE TABLE Tags(
+                     tag_id BIGSERIAL PRIMARY KEY,
+                     text VARCHAR(100)
+);
+
+CREATE TABLE Announcements(
+                              announcement_id BIGSERIAL PRIMARY KEY,
+                              company_id BIGSERIAL,
+                              image_id BIGSERIAL,
+                              title VARCHAR(100) NOT NULL,
+                              description_id BIGSERIAL NOT NULL,
+                              short_description VARCHAR(1000) NOT NULL,
+                              publish_date DATE NOT NULL,
+                              importance INT,
+                              approved_for_publishing BOOLEAN NOT NULL,
+                              link VARCHAR(200),
+                              CONSTRAINT fk_description FOREIGN KEY(description_id) REFERENCES Descriptions(description_id),
+                            CONSTRAINT fk_company FOREIGN KEY(company_id) REFERENCES Companies(company_id),
+                                CONSTRAINT fk_image FOREIGN KEY(image_id) REFERENCES Images(image_id)
+                          );
+
+CREATE TABLE AnnouncementsTags(
+                                  announcement_id BIGSERIAL,
+                                  tag_id BIGSERIAL,
+                                  PRIMARY KEY (announcement_id, tag_id),
+                                  CONSTRAINT fk_announcements FOREIGN KEY(announcement_id) REFERENCES Announcements(announcement_id),
+                                  CONSTRAINT fk_tags FOREIGN KEY(tag_id) REFERENCES Tags(tag_id)
+);
+
+CREATE TABLE Internships(
+                            announcement_id BIGSERIAL,
+                            start_date DATE NOT NULL,
+                            requirements VARCHAR(10000) NOT NULL,
+                            no_available_positions INT,
+                            limit_date DATE NOT NULL,
+                            CONSTRAINT fk_internships FOREIGN KEY(announcement_id) REFERENCES Announcements(announcement_id)
+);
+
+CREATE TABLE Jobs(
+                     announcement_id BIGSERIAL,
+                     requirements VARCHAR(10000) NOT NULL,
+                     limit_date DATE,
+                     CONSTRAINT fk_jobs FOREIGN KEY(announcement_id) REFERENCES Announcements(announcement_id)
+);
+
+CREATE TABLE Contests(
+                         announcement_id BIGSERIAL,
+                         location VARCHAR(100) NOT NULL,
+                         date DATE NOT NULL,
+                         limit_date DATE NOT NULL,
+                         price FLOAT NOT NULL,
+                         prizes VARCHAR(5000),
+                         CONSTRAINT fk_contests FOREIGN KEY(announcement_id) REFERENCES Announcements(announcement_id)
+);
+
+CREATE TABLE Scholarships(
+                             announcement_id BIGSERIAL,
+                             requirements VARCHAR(10000) NOT NULL,
+                             limit_date DATE,
+                             no_available_positions INT,
+                             CONSTRAINT fk_scholarships FOREIGN KEY(announcement_id) REFERENCES Announcements(announcement_id)
+);
+
+CREATE TABLE Courses(
+                        announcement_id BIGSERIAL,
+                        limit_date DATE,
+                        start_date DATE NOT NULL,
+                        CONSTRAINT fk_courses FOREIGN KEY(announcement_id) REFERENCES Announcements(announcement_id)
+);
+
+CREATE TABLE Others(
+                       announcement_id BIGSERIAL,
+                       details VARCHAR(10000),
+                       CONSTRAINT fk_others FOREIGN KEY(announcement_id) REFERENCES Announcements(announcement_id)
+);
+
+CREATE TABLE Users(
+                      id BIGSERIAL PRIMARY KEY,
+                      username VARCHAR(1000),
+                      password VARCHAR(1000)
+);
+
+
+
+--modifying company table:  removing username and password
+--                          adding telephone, email, isGold
+ALTER TABLE companies
+DROP COLUMN username;
+
+ALTER TABLE companies
+DROP COLUMN password;
+
+ALTER TABLE companies
+ADD telephone varchar(20);
+
+ALTER TABLE companies
+ADD email varchar(100);
+
+ALTER TABLE companies
+ADD is_gold boolean;
+
+
+--changeing the field 'importance' form announcements to 'isPinned'
+ALTER TABLE Announcements
+DROP COLUMN importance;
+
+ALTER TABLE announcements
+ADD is_pinned boolean
