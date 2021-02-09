@@ -121,6 +121,8 @@ public class Announcement implements Serializable {
 //        return company;
 //    }
 
+    public Company methodToGetTheCompany(){ return this.company; }
+
     public void setCompany(Company company) {
         this.company = company;
     }

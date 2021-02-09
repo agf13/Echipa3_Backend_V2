@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -41,7 +42,25 @@ public class AnnouncementController {
 
     @GetMapping()
     public List<Announcement> list(){
-        return service.getAll();
+        List<Announcement> resultList = new ArrayList<>();
+        List<Announcement> goldList = new ArrayList<>();
+        List<Announcement> theRestList = new ArrayList<>();
+        for(Announcement announcement : service.getAll()){
+            //first adding the pinned ones to the results
+            if(announcement.getIsPinned() == true)
+                resultList.add(announcement);
+            //then adding the gold ones to a list that will be concatenated to the result
+            else if(announcement.methodToGetTheCompany().isIs_gold() == true){
+                goldList.add(announcement);
+            }
+            //then the rest of the announcements in another list
+            else
+                theRestList.add(announcement);
+        }
+        resultList.addAll(goldList);
+        resultList.addAll(theRestList);
+
+        return resultList;
     }
 
 
