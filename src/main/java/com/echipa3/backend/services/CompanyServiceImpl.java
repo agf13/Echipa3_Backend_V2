@@ -3,7 +3,6 @@ package com.echipa3.backend.services;
 import com.echipa3.backend.entities.Announcement;
 import com.echipa3.backend.entities.Company;
 import com.echipa3.backend.repositories.IRepoCompany;
-import com.echipa3.backend.repositories.IRepoCourse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,8 +34,8 @@ public class CompanyServiceImpl implements ICompanyService{
     }
 
     @Override
-    public void saveOrUpdate(Company company) {
-        repository.save(company);
+    public Company saveOrUpdate(Company company) {
+        return repository.save(company);
     }
 
     @Override
