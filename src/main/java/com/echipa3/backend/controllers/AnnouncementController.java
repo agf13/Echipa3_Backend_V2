@@ -61,6 +61,24 @@ public class AnnouncementController {
         return service.saveOrUpdate(announcement);
     }
 
+    @PutMapping(value = "pin/{id}")
+    public Announcement setPin(@PathVariable("id") Long id){
+        Announcement announcement = this.service.getById(id);
+        if(announcement!=null){
+            announcement.setPinned(true);
+        }
+        return announcement;
+    }
+
+    @PutMapping(value = "unpin/{id}")
+    public Announcement unsetPin(@PathVariable("id") Long id){
+        Announcement announcement = this.service.getById(id);
+        if(announcement!=null){
+            announcement.setPinned(false);
+        }
+        return announcement;
+    }
+
     /*
     {
         "id": 1,
@@ -192,7 +210,7 @@ public class AnnouncementController {
     public List<AnnouncementDto> listUnapproved(){
         List<Announcement> announcementList = new ArrayList<>();
         List<Announcement> result = new ArrayList<>();
-        for(Announcement announcement : announcementList){
+        for(Announcement announcement : this.service.getAll()){
             if(announcement.isApprovedForPublishing() == false)
                 result.add(announcement);
         }
@@ -214,5 +232,81 @@ public class AnnouncementController {
             announcementDtos.add(announcementDto);
         });
         return announcementDtos;
+    }
+
+    @GetMapping(value = "/bycompany/id/{companyId}")
+    public List<AnnouncementDto> getByCompany(@PathVariable("companyId") Long companyId){
+        List<Announcement> announcementList = new ArrayList<>();
+        for(Announcement announcement : this.service.getAll()){
+            if(announcement.getCompanyId() == companyId)
+                announcementList.add(announcement);
+        }
+        announcementList = orderAnnouncements(announcementList);
+
+        return convertToListDto(announcementList);
+    }
+
+    @GetMapping(value = "/bycompany/name/{companyname}")
+    public List<AnnouncementDto> getByCompanyName(@PathVariable("companyname") String companyName){
+        List<Announcement> announcementList = new ArrayList<>();
+        for(Announcement announcement : this.service.getAll()){
+            if(announcement.methodToGetTheCompany().getName().toLowerCase().contains(companyName.toLowerCase())){
+                announcementList.add(announcement);
+            }
+        }
+        announcementList = orderAnnouncements(announcementList);
+        return convertToListDto(announcementList);
+    }
+
+
+
+
+
+    ///some utility functions below
+
+    //take a list o announcements and orders it
+    private List<Announcement> orderAnnouncements(List<Announcement> announcementList){
+        List<Announcement> result = new ArrayList<>();
+        List<Announcement> goldList = new ArrayList<>();
+        List<Announcement> theRestOfThem = new ArrayList<>();
+
+        for(Announcement announcement : announcementList){
+            if(announcement.isPinned())
+                result.add(announcement);
+            else if(announcement.methodToGetTheCompany().isIs_gold())
+                goldList.add(announcement);
+            else
+                theRestOfThem.add(announcement);
+        }
+        result.addAll(goldList);
+        result.addAll(theRestOfThem);
+
+        return result;
+    }
+
+    private AnnouncementDto convertToDto(Announcement announcement){
+        AnnouncementDto announcementDto = new AnnouncementDto();
+        announcementDto.setId(announcement.getId());
+        announcementDto.setTitle(announcement.getTitle());
+        announcementDto.setImage(announcement.getImage());
+        announcementDto.setDescription(announcement.getDescription());
+        announcementDto.setShortDescription(announcement.getShortDescription());
+        announcementDto.setPublishedDate(announcement.getPublishedDate());
+        announcementDto.setPinned(announcement.isPinned());
+        announcementDto.setApprovedForPublishing(announcement.isApprovedForPublishing());
+        announcementDto.setLink(announcement.getLink());
+        announcementDto.setTags(announcement.getTags());
+        announcementDto.setCompanyId(announcement.getCompanyId());
+        announcementDto.setType(service.getType(announcement.getId()));
+
+        return announcementDto;
+    }
+
+    private List<AnnouncementDto> convertToListDto(List<Announcement> announcementList){
+        List<AnnouncementDto> dtos = new ArrayList<>();
+        announcementList.forEach(announcement -> {
+            dtos.add(convertToDto(announcement));
+        });
+        return dtos;
     }
 }
