@@ -72,6 +72,9 @@ public class Announcement implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags;
 
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "tag_id", )
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "company_id", referencedColumnName = "company_id", insertable = false, updatable = false)
     Company company;
