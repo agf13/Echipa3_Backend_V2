@@ -48,6 +48,29 @@ public class AnnouncementController {
         List<Announcement> goldList = new ArrayList<>();
         List<Announcement> theRestList = new ArrayList<>();
         for(Announcement announcement : service.getAll()){
+            //first adding the pinned ones to the results
+            if (announcement.isPinned() == true)
+                resultList.add(announcement);
+                //then adding the gold ones to a list that will be concatenated to the result
+            else if (announcement.methodToGetTheCompany().isIs_gold() == true) {
+                goldList.add(announcement);
+            }
+            //then the rest of the announcements in another list
+            else
+                theRestList.add(announcement);
+        }
+        resultList.addAll(goldList);
+        resultList.addAll(theRestList);
+
+        return resultList;
+    }
+
+    @GetMapping(value = "approved")
+    public List<Announcement> listApproved(){
+        List<Announcement> resultList = new ArrayList<>();
+        List<Announcement> goldList = new ArrayList<>();
+        List<Announcement> theRestList = new ArrayList<>();
+        for(Announcement announcement : service.getAll()){
             if(announcement.isApprovedForPublishing() == true) {
                 //first adding the pinned ones to the results
                 if (announcement.isPinned() == true)
