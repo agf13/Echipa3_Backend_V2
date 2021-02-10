@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -51,10 +53,20 @@ public class ImageServiceImpl implements IImageService {
     public Image saveImage(byte[] imageBytes, String imageName, String imageContentType) {
         String imageUrl = uploadImageInS3(imageBytes, imageName, imageContentType);
 
-        Image image = new Image(Math.abs(new Random().nextLong()), imageUrl); // TODO genereaza id-ul automat
+        Image image = new Image(imageUrl); // TODO genereaza id-ul automat
         repoImage.save(image);
 
         return image;
+    }
+
+    @Override
+    public List<Long> getAllIds() {
+        List<Image> imageList = (List<Image>)repoImage.findAll();
+        List<Long> idList = new ArrayList<>();
+        for(Image image : imageList){
+            idList.add(image.getImageId());
+        }
+        return idList;
     }
 
     public String uploadImageInS3(byte[] imageBytes, String imageName, String imageContentType) {
