@@ -61,7 +61,7 @@ public class AnnouncementController {
         return service.saveOrUpdate(announcement);
     }
 
-    @PutMapping(value = "pin/{id}")
+    @PostMapping(value = "pin/{id}")
     public Announcement setPin(@PathVariable("id") Long id){
         Announcement announcement = this.service.getById(id);
         if(announcement!=null){
@@ -70,7 +70,7 @@ public class AnnouncementController {
         return announcement;
     }
 
-    @PutMapping(value = "unpin/{id}")
+    @PostMapping(value = "unpin/{id}")
     public Announcement unsetPin(@PathVariable("id") Long id){
         Announcement announcement = this.service.getById(id);
         if(announcement!=null){
@@ -79,7 +79,7 @@ public class AnnouncementController {
         return announcement;
     }
 
-    @PutMapping(value = "approve/{id}")
+    @PostMapping(value = "approve/{id}")
     public Announcement approveAnnouncement(@PathVariable("id") Long id){
         Announcement announcement = this.service.getById(id);
         if(announcement!=null){
@@ -88,7 +88,7 @@ public class AnnouncementController {
         return announcement;
     }
 
-    @PutMapping(value = "unapprove/{id}")
+    @PostMapping(value = "unapprove/{id}")
     public Announcement unapproveAnnouncement(@PathVariable("id") Long id){
         Announcement announcement = this.service.getById(id);
         if(announcement!=null){
