@@ -9,7 +9,7 @@ public interface IJobService {
 
     public Job getById(Long id);
 
-    public void saveOrUpdate(Job job);
+    public Job saveOrUpdate(Job job);
 
     public void delete(Long id);
 }

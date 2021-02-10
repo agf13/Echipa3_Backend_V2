@@ -19,10 +19,15 @@ public class JobController {
 
     @PostMapping
     public Job save(@RequestBody Job job){
-        service.saveOrUpdate(job);
-        return job;
+        return service.saveOrUpdate(job);
     }
 
     @GetMapping
     public List<Job> list() { return service.getAll(); }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Job getJobById(@PathVariable("id") Long id) {
+        return service.getById(id);
+    }
 }

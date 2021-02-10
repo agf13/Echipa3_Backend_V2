@@ -18,12 +18,17 @@ public class TagController {
 
     @PostMapping()
     public Tag save(@RequestBody Tag tag){
-        service.saveOrUpdate(tag);
-        return tag;
+        return service.saveOrUpdate(tag);
     }
 
     @GetMapping()
     public List<Tag> list(){
         return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Tag getScholarshipById(@PathVariable("id") Long id) {
+        return service.getById(id);
     }
 }

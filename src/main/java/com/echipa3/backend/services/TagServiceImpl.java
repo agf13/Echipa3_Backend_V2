@@ -26,8 +26,8 @@ public class TagServiceImpl implements ITagService {
     }
 
     @Override
-    public void saveOrUpdate(Tag tag) {
-        repository.save(tag);
+    public Tag saveOrUpdate(Tag tag) {
+        return repository.save(tag);
     }
 
     @Override

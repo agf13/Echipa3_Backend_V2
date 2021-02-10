@@ -9,7 +9,7 @@ public interface IDescriptionService {
 
     public Description getById(Long id);
 
-    public void saveOrUpdate(Description description);
+    public Description saveOrUpdate(Description description);
 
     public void delete(Long id);
 }

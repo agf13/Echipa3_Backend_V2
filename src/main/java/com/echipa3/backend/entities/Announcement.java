@@ -72,9 +72,6 @@ public class Announcement implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags;
 
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "tag_id", )
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "company_id", referencedColumnName = "company_id", insertable = false, updatable = false)
     Company company;
@@ -116,6 +113,14 @@ public class Announcement implements Serializable {
         return tags;
     }
 
+    public boolean isPinned() {
+        return isPinned;
+    }
+
+    public void setPinned(boolean pinned) {
+        isPinned = pinned;
+    }
+
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
@@ -123,8 +128,6 @@ public class Announcement implements Serializable {
 //    public Company getCompany() {
 //        return company;
 //    }
-
-    public Company methodToGetTheCompany(){ return this.company; }
 
     public void setCompany(Company company) {
         this.company = company;
@@ -154,6 +157,12 @@ public class Announcement implements Serializable {
         this.companyId = companyId;
     }
 
+    //the following method is important for listing the announcements form gold compnaies
+    //please don't delete and don't change the name to "getCompany"
+    public Company methodToGetTheCompany(){
+        return this.company;
+    }
+
     public Long getId(){ return this.id; }
 
     public void setId(Long id){ this.id = id; }
@@ -181,10 +190,6 @@ public class Announcement implements Serializable {
 
     public void setPublishedDate(Date publishedDate) { this.publishedDate = publishedDate; }
 
-    public boolean getIsPinned() { return isPinned; }
-
-    public void setIsPinned(boolean isPinned) { this.isPinned = isPinned; }
-
     public boolean isApprovedForPublishing() { return approvedForPublishing;}
 
     public void setApprovedForPublishing(boolean approvedForPublishing) { this.approvedForPublishing = approvedForPublishing; }
@@ -193,16 +198,7 @@ public class Announcement implements Serializable {
 
     public void setLink(String link) { this.link = link;}
 
-//    public List<Tag> getTags() {return tags;}
-//    public void setTags(List<Tag> tags) {this.tags = tags; }
 
-//    public Set<AnnouncementTag> getAnnouncementTagsList() {
-//        return announcementTagsList;
-//    }
-//
-//    public void setAnnouncementTagsList(Set<AnnouncementTag> announcementTagsList) {
-//        this.announcementTagsList = announcementTagsList;
-//    }
 
     @Override
     public String toString() {

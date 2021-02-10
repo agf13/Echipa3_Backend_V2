@@ -18,10 +18,15 @@ public class CourseController {
 
     @PostMapping
     public Course save(@RequestBody Course course){
-        service.saveOrUpdate(course);
-        return course;
+        return service.saveOrUpdate(course);
     }
 
     @GetMapping
     public List<Course> list(){ return service.getAll(); }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Course getCourseById(@PathVariable("id") Long id) {
+        return service.getById(id);
+    }
 }

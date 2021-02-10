@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -19,14 +18,19 @@ public class InternshipController {
 
     @PostMapping()
     public Internship save(@RequestBody Internship internship){
-        internship.setLimitDate(new Date());
-        internship.setStartDate(new Date());
-        service.saveOrUpdate(internship);
-        return internship;
+        //internship.setLimitDate(new Date());
+        //internship.setStartDate(new Date());
+        return service.saveOrUpdate(internship);
     }
 
     @GetMapping()
     public List<Internship> list(){
         return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Internship getInternshipById(@PathVariable("id") Long id) {
+        return service.getById(id);
     }
 }

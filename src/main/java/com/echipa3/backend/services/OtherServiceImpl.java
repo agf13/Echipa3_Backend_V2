@@ -26,8 +26,8 @@ public class OtherServiceImpl implements IOtherService{
     }
 
     @Override
-    public void saveOrUpdate(Other other) {
-        repository.save(other);
+    public Other saveOrUpdate(Other other) {
+        return repository.save(other);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class ContestServiceImpl implements IContestService{
     public Contest getById(Long id) { return repository.findById(id).get(); }
 
     @Override
-    public void saveOrUpdate(Contest contest) { repository.save(contest); }
+    public Contest saveOrUpdate(Contest contest) { return repository.save(contest); }
 
     @Override
     public void delete(Long id) { repository.deleteById(id); }

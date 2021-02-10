@@ -18,12 +18,17 @@ public class DescrpitionController {
 
     @PostMapping()
     public Description save(@RequestBody Description description){
-        service.saveOrUpdate(description);
-        return description;
+        return service.saveOrUpdate(description);
     }
 
     @GetMapping()
     public List<Description> list(){
         return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Description getDescriptionById(@PathVariable("id") Long id) {
+        return service.getById(id);
     }
 }

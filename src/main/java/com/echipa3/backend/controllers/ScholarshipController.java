@@ -18,13 +18,18 @@ public class ScholarshipController {
 
     @PostMapping()
     public Scholarship save(@RequestBody Scholarship scholarship){
-        service.saveOrUpdate(scholarship);
-        return scholarship;
+        return service.saveOrUpdate(scholarship);
     }
 
     @GetMapping()
     public List<Scholarship> getAll(){
         return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Scholarship getScholarshipById(@PathVariable("id") Long id) {
+        return service.getById(id);
     }
 
 }

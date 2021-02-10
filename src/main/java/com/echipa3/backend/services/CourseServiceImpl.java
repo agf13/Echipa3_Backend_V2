@@ -1,7 +1,6 @@
 package com.echipa3.backend.services;
 
 import com.echipa3.backend.entities.Course;
-import com.echipa3.backend.repositories.IRepoContest;
 import com.echipa3.backend.repositories.IRepoCourse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +26,8 @@ public class CourseServiceImpl implements ICourseService{
     }
 
     @Override
-    public void saveOrUpdate(Course course) {
-        repository.save(course);
+    public Course saveOrUpdate(Course course) {
+        return repository.save(course);
     }
 
     @Override

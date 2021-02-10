@@ -18,12 +18,17 @@ public class OtherController {
 
     @PostMapping()
     public Other save(@RequestBody Other other){
-        service.saveOrUpdate(other);
-        return other;
+        return service.saveOrUpdate(other);
     }
 
     @GetMapping()
     public List<Other> get(){
         return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Other getOtherById(@PathVariable("id") Long id) {
+        return service.getById(id);
     }
 }

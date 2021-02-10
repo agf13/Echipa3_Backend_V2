@@ -7,9 +7,9 @@ import java.util.List;
 public interface IScholarshipService {
     public List<Scholarship> getAll();
 
-    public Scholarship get(Long id);
+    public Scholarship getById(Long id);
 
-    public void saveOrUpdate(Scholarship scholarship);
+    public Scholarship saveOrUpdate(Scholarship scholarship);
 
     public void delete(Long id);
 }
