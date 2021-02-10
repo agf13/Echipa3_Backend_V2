@@ -63,4 +63,10 @@ public class AnnouncementController {
     public List<Announcement> list(){
         return service.getAll();
     }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Announcement getEmployeesByIdWithVariableName(@PathVariable("id") Long id) {
+        return service.getById(id);
+    }
 }
