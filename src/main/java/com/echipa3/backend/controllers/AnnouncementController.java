@@ -79,6 +79,24 @@ public class AnnouncementController {
         return announcement;
     }
 
+    @PutMapping(value = "approve/{id}")
+    public Announcement approveAnnouncement(@PathVariable("id") Long id){
+        Announcement announcement = this.service.getById(id);
+        if(announcement!=null){
+            announcement.setApprovedForPublishing(true);
+        }
+        return announcement;
+    }
+
+    @PutMapping(value = "unapprove/{id}")
+    public Announcement unapproveAnnouncement(@PathVariable("id") Long id){
+        Announcement announcement = this.service.getById(id);
+        if(announcement!=null){
+            announcement.setApprovedForPublishing(false);
+        }
+        return announcement;
+    }
+
     /*
     {
         "id": 1,
