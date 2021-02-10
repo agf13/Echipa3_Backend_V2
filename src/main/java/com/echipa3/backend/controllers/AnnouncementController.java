@@ -63,38 +63,22 @@ public class AnnouncementController {
 
     @PostMapping(value = "pin/{id}")
     public Announcement setPin(@PathVariable("id") Long id){
-        Announcement announcement = this.service.getById(id);
-        if(announcement!=null){
-            announcement.setPinned(true);
-        }
-        return announcement;
+        return this.service.setIsPinned(id, true);
     }
 
     @PostMapping(value = "unpin/{id}")
     public Announcement unsetPin(@PathVariable("id") Long id){
-        Announcement announcement = this.service.getById(id);
-        if(announcement!=null){
-            announcement.setPinned(false);
-        }
-        return announcement;
+        return this.service.setIsPinned(id, false);
     }
 
     @PostMapping(value = "approve/{id}")
     public Announcement approveAnnouncement(@PathVariable("id") Long id){
-        Announcement announcement = this.service.getById(id);
-        if(announcement!=null){
-            announcement.setApprovedForPublishing(true);
-        }
-        return announcement;
+        return this.service.setApprovedForPublishing(id, true);
     }
 
     @PostMapping(value = "unapprove/{id}")
     public Announcement unapproveAnnouncement(@PathVariable("id") Long id){
-        Announcement announcement = this.service.getById(id);
-        if(announcement!=null){
-            announcement.setApprovedForPublishing(false);
-        }
-        return announcement;
+        return this.service.setApprovedForPublishing(id, false);
     }
 
     /*

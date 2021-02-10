@@ -11,6 +11,10 @@ public interface IAnnouncementService {
 
     public Announcement saveOrUpdate(Announcement entity);
 
+    public Announcement setIsPinned(Long id, boolean isPinned);
+
+    public Announcement setApprovedForPublishing(Long id, boolean isApproved);
+
     public void delete(Long id);
 
     String getType(Long id);

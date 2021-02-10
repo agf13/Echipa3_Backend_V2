@@ -42,6 +42,20 @@ public class AnnouncementServiceImpl implements IAnnouncementService{
         return repository.save(entity);
     }
 
+    @Override
+    public Announcement setIsPinned(Long id, boolean isPinned){
+        Announcement announcement = repository.findById(id).get();
+        announcement.setPinned(isPinned);
+        return announcement;
+    }
+
+    @Override
+    public Announcement setApprovedForPublishing(Long id, boolean isApproved){
+        Announcement announcement = repository.findById(id).get();
+        announcement.setApprovedForPublishing(isApproved);
+        return announcement;
+    }
+
 
     @Override
     public void delete(Long id) {
