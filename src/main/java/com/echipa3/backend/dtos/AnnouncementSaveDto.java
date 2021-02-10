@@ -5,6 +5,7 @@ import java.util.List;
 
 public class AnnouncementSaveDto {
 
+    private Long id;
     private String title;
     Long imageId;
     Long descriptionId;
@@ -16,7 +17,16 @@ public class AnnouncementSaveDto {
     private List<Long> tags;
     Long companyId;
 
-    public AnnouncementSaveDto(String title, Long imageId, Long descriptionId, String shortDescription, Date publishedDate, boolean isPinned, boolean approvedForPublishing, String link, List<Long> tags, Long companyId) {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public AnnouncementSaveDto(Long id, String title, Long imageId, Long descriptionId, String shortDescription, Date publishedDate, boolean isPinned, boolean approvedForPublishing, String link, List<Long> tags, Long companyId) {
+        this.id = id;
         this.title = title;
         this.imageId = imageId;
         this.descriptionId = descriptionId;

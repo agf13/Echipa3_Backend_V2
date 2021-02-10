@@ -93,6 +93,7 @@ public class AnnouncementController {
         List<AnnouncementDto> announcementDtos = new ArrayList<>();
         announcements.forEach(announcement -> {
             AnnouncementDto announcementDto = new AnnouncementDto();
+            announcementDto.setId(announcement.getId());
             announcementDto.setTitle(announcement.getTitle());
             announcementDto.setImage(announcement.getImage());
             announcementDto.setDescription(announcement.getDescription());
@@ -114,6 +115,7 @@ public class AnnouncementController {
     public AnnouncementDto getAnnouncementById(@PathVariable("id") Long id) {
         Announcement announcement = service.getById(id);
         AnnouncementDto announcementDto = new AnnouncementDto();
+        announcementDto.setId(announcement.getId());
         announcementDto.setTitle(announcement.getTitle());
         announcementDto.setImage(announcement.getImage());
         announcementDto.setDescription(announcement.getDescription());

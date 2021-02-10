@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Set;
 
 public class AnnouncementDto implements Serializable {
+    private Long id;
     private String title;
     private Image image;
     private Description description;
@@ -21,7 +22,8 @@ public class AnnouncementDto implements Serializable {
     private Long companyId;
     private String type;
 
-    public AnnouncementDto(String title, Image image, Description description, String shortDescription, Date publishedDate, boolean isPinned, boolean approvedForPublishing, String link, Set<Tag> tags, Long companyId, String type) {
+    public AnnouncementDto(Long id, String title, Image image, Description description, String shortDescription, Date publishedDate, boolean isPinned, boolean approvedForPublishing, String link, Set<Tag> tags, Long companyId, String type) {
+        this.id = id;
         this.title = title;
         this.image = image;
         this.description = description;
@@ -33,6 +35,14 @@ public class AnnouncementDto implements Serializable {
         this.tags = tags;
         this.companyId = companyId;
         this.type = type;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public AnnouncementDto() {
