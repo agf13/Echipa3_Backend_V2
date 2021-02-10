@@ -48,21 +48,34 @@ public class AnnouncementController {
         List<Announcement> goldList = new ArrayList<>();
         List<Announcement> theRestList = new ArrayList<>();
         for(Announcement announcement : service.getAll()){
-            //first adding the pinned ones to the results
-            if(announcement.isPinned() == true)
-                resultList.add(announcement);
-            //then adding the gold ones to a list that will be concatenated to the result
-            else if(announcement.methodToGetTheCompany().isIs_gold() == true){
-                goldList.add(announcement);
+            if(announcement.isApprovedForPublishing() == true) {
+                //first adding the pinned ones to the results
+                if (announcement.isPinned() == true)
+                    resultList.add(announcement);
+                    //then adding the gold ones to a list that will be concatenated to the result
+                else if (announcement.methodToGetTheCompany().isIs_gold() == true) {
+                    goldList.add(announcement);
+                }
+                //then the rest of the announcements in another list
+                else
+                    theRestList.add(announcement);
             }
-            //then the rest of the announcements in another list
-            else
-                theRestList.add(announcement);
         }
         resultList.addAll(goldList);
         resultList.addAll(theRestList);
 
         return resultList;
+    }
+
+    @GetMapping(value = "/unapproved")
+    public List<Announcement> listUnapproved(){
+        List<Announcement> announcementList = new ArrayList<>();
+        List<Announcement> result = new ArrayList<>();
+        for(Announcement announcement : announcementList){
+            if(announcement.isApprovedForPublishing() == false)
+                result.add(announcement);
+        }
+        return announcementList;
     }
 
     @GetMapping("/{id}")
