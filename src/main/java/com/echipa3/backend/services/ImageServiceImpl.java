@@ -53,7 +53,7 @@ public class ImageServiceImpl implements IImageService {
     public Image saveImage(byte[] imageBytes, String imageName, String imageContentType) {
         String imageUrl = uploadImageInS3(imageBytes, imageName, imageContentType);
 
-        Image image = new Image(imageUrl); // TODO genereaza id-ul automat
+        Image image = new Image(imageUrl);
         repoImage.save(image);
 
         return image;
