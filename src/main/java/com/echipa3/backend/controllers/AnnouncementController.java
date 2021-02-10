@@ -81,6 +81,12 @@ public class AnnouncementController {
         return this.service.setApprovedForPublishing(id, false);
     }
 
+    @PostMapping(value = "/update")
+    public Announcement updateAnnouncement(@RequestBody AnnouncementSaveDto announcementSaveDto){
+        Announcement announcement = convertFromSaveAnnouncementDto(announcementSaveDto);
+        return this.service.saveOrUpdate(announcement);
+    }
+
     /*
     {
         "id": 1,
@@ -302,6 +308,42 @@ public class AnnouncementController {
         announcementDto.setType(service.getType(announcement.getId()));
 
         return announcementDto;
+    }
+
+    private Announcement convertFromDto(AnnouncementDto announcementDto){
+        Announcement announcement = new Announcement();
+
+        announcement.setId(announcementDto.getId());
+        announcement.setTitle(announcementDto.getTitle());
+        announcement.setImage(announcementDto.getImage());
+        announcement.setDescription(announcementDto.getDescription());
+        announcement.setShortDescription(announcementDto.getShortDescription());
+        announcement.setPublishedDate(announcementDto.getPublishedDate());
+        announcement.setPinned(announcementDto.isPinned());
+        announcement.setApprovedForPublishing(announcementDto.isApprovedForPublishing());
+        announcement.setLink(announcementDto.getLink());
+        announcement.setTags(announcementDto.getTags());
+        announcement.setCompanyId(announcementDto.getCompanyId());
+
+        return announcement;
+    }
+
+    private Announcement convertFromSaveAnnouncementDto(AnnouncementSaveDto announcementSaveDto){
+        Announcement announcement = new Announcement();
+
+        announcement.setId(announcementSaveDto.getId());
+        announcement.setTitle(announcementSaveDto.getTitle());
+        announcement.setImageId(announcementSaveDto.getImageId());
+        announcement.setDescriptionId(announcementSaveDto.getDescriptionId());
+        announcement.setShortDescription(announcementSaveDto.getShortDescription());
+        announcement.setPublishedDate(announcementSaveDto.getPublishedDate());
+        announcement.setPinned(announcementSaveDto.isPinned());
+        announcement.setApprovedForPublishing(announcementSaveDto.isApprovedForPublishing());
+        announcement.setLink(announcementSaveDto.getLink());
+        //the list of tags id's from Dto is not used. (I don't know how. Not anything planned)
+        announcement.setCompanyId(announcementSaveDto.getCompanyId());
+
+        return announcement;
     }
 
     private List<AnnouncementDto> convertToListDto(List<Announcement> announcementList){
