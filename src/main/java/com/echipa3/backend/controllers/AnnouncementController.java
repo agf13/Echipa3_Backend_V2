@@ -63,6 +63,7 @@ public class AnnouncementController {
 
     /*
     {
+        "id": 1,
         "title": "contest",
         "image": {
             "imageId": 1,
