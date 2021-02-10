@@ -18,8 +18,7 @@ public class DescrpitionController {
 
     @PostMapping()
     public Description save(@RequestBody Description description){
-        service.saveOrUpdate(description);
-        return description;
+        return service.saveOrUpdate(description);
     }
 
     @GetMapping()

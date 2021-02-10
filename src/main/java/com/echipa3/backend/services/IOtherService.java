@@ -9,7 +9,7 @@ public interface IOtherService {
 
     public Other getById(Long id);
 
-    public void saveOrUpdate(Other other);
+    public Other saveOrUpdate(Other other);
 
     public void delete(Long id);
 

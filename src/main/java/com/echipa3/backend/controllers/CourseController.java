@@ -18,8 +18,7 @@ public class CourseController {
 
     @PostMapping
     public Course save(@RequestBody Course course){
-        service.saveOrUpdate(course);
-        return course;
+        return service.saveOrUpdate(course);
     }
 
     @GetMapping

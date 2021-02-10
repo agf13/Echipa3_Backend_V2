@@ -1,6 +1,5 @@
 package com.echipa3.backend.services;
 
-import com.amazonaws.services.ec2.model.ScheduledInstance;
 import com.echipa3.backend.entities.Scholarship;
 import com.echipa3.backend.repositories.IRepoScholarship;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,8 @@ public class ScholarshipServiceImpl implements IScholarshipService{
     }
 
     @Override
-    public void saveOrUpdate(Scholarship scholarship) {
-        repository.save(scholarship);
+    public Scholarship saveOrUpdate(Scholarship scholarship) {
+        return repository.save(scholarship);
     }
 
     @Override

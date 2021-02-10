@@ -9,7 +9,7 @@ public interface ITagService {
 
     public Tag getById(Long id);
 
-    public void saveOrUpdate(Tag tag);
+    public Tag saveOrUpdate(Tag tag);
 
     public void delete(Long id);
 }

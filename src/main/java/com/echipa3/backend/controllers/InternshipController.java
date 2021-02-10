@@ -19,10 +19,9 @@ public class InternshipController {
 
     @PostMapping()
     public Internship save(@RequestBody Internship internship){
-        internship.setLimitDate(new Date());
-        internship.setStartDate(new Date());
-        service.saveOrUpdate(internship);
-        return internship;
+        //internship.setLimitDate(new Date());
+        //internship.setStartDate(new Date());
+        return service.saveOrUpdate(internship);
     }
 
     @GetMapping()

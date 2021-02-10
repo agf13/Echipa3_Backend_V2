@@ -19,8 +19,7 @@ public class CompanyController {
 
     @PostMapping()
     public Company save(@RequestBody Company company){
-        service.saveOrUpdate(company);
-        return company;
+        return service.saveOrUpdate(company);
     }
 
     @GetMapping(value = "/get")

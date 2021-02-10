@@ -18,8 +18,7 @@ public class ScholarshipController {
 
     @PostMapping()
     public Scholarship save(@RequestBody Scholarship scholarship){
-        service.saveOrUpdate(scholarship);
-        return scholarship;
+        return service.saveOrUpdate(scholarship);
     }
 
     @GetMapping()

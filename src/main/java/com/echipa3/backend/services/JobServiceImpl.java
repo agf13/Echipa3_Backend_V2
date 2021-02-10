@@ -22,7 +22,7 @@ public class JobServiceImpl implements IJobService{
     public Job getById(Long id) { return repository.findById(id).get(); }
 
     @Override
-    public void saveOrUpdate(Job job) { repository.save(job); }
+    public Job saveOrUpdate(Job job) { return repository.save(job); }
 
     @Override
     public void delete(Long id) { repository.deleteById(id); }

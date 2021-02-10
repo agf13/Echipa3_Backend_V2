@@ -18,8 +18,7 @@ public class TagController {
 
     @PostMapping()
     public Tag save(@RequestBody Tag tag){
-        service.saveOrUpdate(tag);
-        return tag;
+        return service.saveOrUpdate(tag);
     }
 
     @GetMapping()

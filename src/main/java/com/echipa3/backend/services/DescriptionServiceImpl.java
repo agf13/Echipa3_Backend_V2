@@ -26,8 +26,8 @@ public class DescriptionServiceImpl implements IDescriptionService{
     }
 
     @Override
-    public void saveOrUpdate(Description description) {
-        repository.save(description);
+    public Description saveOrUpdate(Description description) {
+        return repository.save(description);
     }
 
     @Override

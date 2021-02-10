@@ -19,8 +19,7 @@ public class JobController {
 
     @PostMapping
     public Job save(@RequestBody Job job){
-        service.saveOrUpdate(job);
-        return job;
+        return service.saveOrUpdate(job);
     }
 
     @GetMapping

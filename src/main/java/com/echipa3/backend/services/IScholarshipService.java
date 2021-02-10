@@ -9,7 +9,7 @@ public interface IScholarshipService {
 
     public Scholarship get(Long id);
 
-    public void saveOrUpdate(Scholarship scholarship);
+    public Scholarship saveOrUpdate(Scholarship scholarship);
 
     public void delete(Long id);
 }

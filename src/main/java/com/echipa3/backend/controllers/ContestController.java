@@ -19,8 +19,7 @@ public class ContestController {
 
     @PostMapping
     public Contest save(@RequestBody Contest contest){
-        service.saveOrUpdate(contest);
-        return contest;
+        return service.saveOrUpdate(contest);
     }
 
     @GetMapping

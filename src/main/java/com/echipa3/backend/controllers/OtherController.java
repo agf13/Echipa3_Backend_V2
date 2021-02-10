@@ -18,8 +18,7 @@ public class OtherController {
 
     @PostMapping()
     public Other save(@RequestBody Other other){
-        service.saveOrUpdate(other);
-        return other;
+        return service.saveOrUpdate(other);
     }
 
     @GetMapping()

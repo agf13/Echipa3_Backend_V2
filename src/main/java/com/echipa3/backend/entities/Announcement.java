@@ -121,17 +121,9 @@ public class Announcement implements Serializable {
         isPinned = pinned;
     }
 
-    public Company getCompany() {
-        return company;
-    }
-
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
-
-//    public Company getCompany() {
-//        return company;
-//    }
 
     public void setCompany(Company company) {
         this.company = company;
