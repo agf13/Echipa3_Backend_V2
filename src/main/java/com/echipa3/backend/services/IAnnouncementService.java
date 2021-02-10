@@ -12,4 +12,6 @@ public interface IAnnouncementService {
     public Announcement saveOrUpdate(Announcement entity);
 
     public void delete(Long id);
+
+    String getType(Long id);
 }
