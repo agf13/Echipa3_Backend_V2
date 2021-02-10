@@ -5,6 +5,8 @@ package com.echipa3.backend.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Table(name = "tags")
@@ -23,8 +25,12 @@ public class Tag implements Serializable {
 
 //    @ManyToMany
 //    private Set<Announcement> announcementList;
+
     @ManyToMany
     private Set<Announcement> announcements;
+
+//    @OneToMany(mappedBy = "")
+//    List<Announcement> announcementList;
 
     public Tag(){
         super();
@@ -46,6 +52,11 @@ public class Tag implements Serializable {
     public void setText(String text) {
         this.text = text;
     }
+
+//    public void setAnnouncementList(Set<Announcement> announcementList){
+//        this.announcementList = announcementList;
+//    }
+//    public Set<Announcement> getAnnouncementList(){ return this.announcementList; }
 
 //    public Set<AnnouncementTag> getAnnouncementTagsList() {
 //        return announcementTagsList;

@@ -23,8 +23,7 @@ public class Image implements Serializable {
     public Image() {
     }
 
-    public Image(@NotNull Long imageId, String imageUrl) {
-        this.imageId = imageId;
+    public Image(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 

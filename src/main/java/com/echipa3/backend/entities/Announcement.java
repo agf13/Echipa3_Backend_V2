@@ -125,6 +125,10 @@ public class Announcement implements Serializable {
         this.tags = tags;
     }
 
+//    public Company getCompany() {
+//        return company;
+//    }
+
     public void setCompany(Company company) {
         this.company = company;
     }
@@ -151,6 +155,12 @@ public class Announcement implements Serializable {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    //the following method is important for listing the announcements form gold compnaies
+    //please don't delete and don't change the name to "getCompany"
+    public Company methodToGetTheCompany(){
+        return this.company;
     }
 
     public Long getId(){ return this.id; }
@@ -180,10 +190,6 @@ public class Announcement implements Serializable {
 
     public void setPublishedDate(Date publishedDate) { this.publishedDate = publishedDate; }
 
-    public boolean getIsPinned() { return isPinned; }
-
-    public void setIsPinned(boolean isPinned) { this.isPinned = isPinned; }
-
     public boolean isApprovedForPublishing() { return approvedForPublishing;}
 
     public void setApprovedForPublishing(boolean approvedForPublishing) { this.approvedForPublishing = approvedForPublishing; }
@@ -192,16 +198,7 @@ public class Announcement implements Serializable {
 
     public void setLink(String link) { this.link = link;}
 
-//    public List<Tag> getTags() {return tags;}
-//    public void setTags(List<Tag> tags) {this.tags = tags; }
 
-//    public Set<AnnouncementTag> getAnnouncementTagsList() {
-//        return announcementTagsList;
-//    }
-//
-//    public void setAnnouncementTagsList(Set<AnnouncementTag> announcementTagsList) {
-//        this.announcementTagsList = announcementTagsList;
-//    }
 
     @Override
     public String toString() {
