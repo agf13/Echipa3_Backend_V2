@@ -26,4 +26,10 @@ public class ScholarshipController {
         return service.getAll();
     }
 
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Scholarship getScholarshipById(@PathVariable("id") Long id) {
+        return service.getById(id);
+    }
+
 }

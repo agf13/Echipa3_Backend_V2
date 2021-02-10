@@ -25,4 +25,10 @@ public class OtherController {
     public List<Other> get(){
         return service.getAll();
     }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Other getOtherById(@PathVariable("id") Long id) {
+        return service.getById(id);
+    }
 }

@@ -66,7 +66,7 @@ public class AnnouncementController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public Announcement getEmployeesByIdWithVariableName(@PathVariable("id") Long id) {
+    public Announcement getAnnouncementById(@PathVariable("id") Long id) {
         return service.getById(id);
     }
 }

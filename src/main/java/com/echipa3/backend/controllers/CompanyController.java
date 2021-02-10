@@ -31,4 +31,10 @@ public class CompanyController {
     public List<Company> list(){
         return service.getAll();
     }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Company getCompanyById(@PathVariable("id") Long id) {
+        return service.getById(id);
+    }
 }

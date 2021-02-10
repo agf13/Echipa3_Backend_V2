@@ -25,4 +25,10 @@ public class TagController {
     public List<Tag> list(){
         return service.getAll();
     }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Tag getScholarshipById(@PathVariable("id") Long id) {
+        return service.getById(id);
+    }
 }

@@ -23,4 +23,10 @@ public class CourseController {
 
     @GetMapping
     public List<Course> list(){ return service.getAll(); }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Course getCourseById(@PathVariable("id") Long id) {
+        return service.getById(id);
+    }
 }

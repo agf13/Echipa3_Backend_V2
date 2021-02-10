@@ -21,7 +21,7 @@ public class ScholarshipServiceImpl implements IScholarshipService{
     }
 
     @Override
-    public Scholarship get(Long id) {
+    public Scholarship getById(Long id) {
         return repository.findById(id).get();
     }
 

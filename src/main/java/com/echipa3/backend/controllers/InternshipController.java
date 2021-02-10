@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,5 +26,11 @@ public class InternshipController {
     @GetMapping()
     public List<Internship> list(){
         return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Internship getInternshipById(@PathVariable("id") Long id) {
+        return service.getById(id);
     }
 }

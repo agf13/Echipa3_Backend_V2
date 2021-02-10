@@ -24,5 +24,4 @@ public class ImageController {
     public Image saveImage(@RequestParam("image") MultipartFile request) throws IOException {
         return imageService.saveImage(request.getBytes(), request.getOriginalFilename(), request.getContentType());
     }
-
 }

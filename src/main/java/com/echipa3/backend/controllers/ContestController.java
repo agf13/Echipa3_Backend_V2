@@ -5,7 +5,6 @@ import com.echipa3.backend.services.IContestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
 
@@ -25,5 +24,10 @@ public class ContestController {
     @GetMapping
     public List<Contest> list() { return service.getAll(); }
 
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Contest getContestById(@PathVariable("id") Long id) {
+        return service.getById(id);
+    }
 
 }

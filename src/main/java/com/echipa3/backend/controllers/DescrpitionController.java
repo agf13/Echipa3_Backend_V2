@@ -25,4 +25,10 @@ public class DescrpitionController {
     public List<Description> list(){
         return service.getAll();
     }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Description getDescriptionById(@PathVariable("id") Long id) {
+        return service.getById(id);
+    }
 }
