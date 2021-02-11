@@ -30,4 +30,9 @@ public class JobController {
     public Job getJobById(@PathVariable("id") Long id) {
         return service.getById(id);
     }
+
+    @PostMapping(value = "/update")
+    public Job updateAnnouncement(@RequestBody Job job){
+        return this.service.saveOrUpdate(job);
+    }
 }

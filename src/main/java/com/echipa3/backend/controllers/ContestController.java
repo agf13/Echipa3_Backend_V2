@@ -30,4 +30,10 @@ public class ContestController {
         return service.getById(id);
     }
 
+    @PostMapping(value = "/update")
+    public Contest updateAnnouncement(@RequestBody Contest contest){
+        return this.service.saveOrUpdate(contest);
+    }
+
+
 }

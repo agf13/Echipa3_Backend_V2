@@ -31,4 +31,9 @@ public class DescrpitionController {
     public Description getDescriptionById(@PathVariable("id") Long id) {
         return service.getById(id);
     }
+
+    @PostMapping(value = "/update")
+    public Description updateAnnouncement(@RequestBody Description desc){
+        return this.service.saveOrUpdate(desc);
+    }
 }
