@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @EnableAutoConfiguration
@@ -44,7 +41,8 @@ public class AnnouncementController {
         announcement.setDescriptionId(announcementDto.getDescriptionId());
         announcement.setImageId(announcementDto.getImageId());
         announcement.setShortDescription(announcementDto.getShortDescription());
-        announcement.setPublishedDate(announcementDto.getPublishedDate());
+        //announcement.setPublishedDate(announcementDto.getPublishedDate());
+        announcement.setPublishedDate(new Date());
         announcement.setLink(announcementDto.getLink());
         announcement.setCompanyId(announcementDto.getCompanyId());
         if(!announcementDto.isPinned()) {
@@ -131,6 +129,11 @@ public class AnnouncementController {
             else
                 theRestList.add(announcement);
         }
+
+        orderByDate(resultList);
+        orderByDate(goldList);
+        orderByDate(theRestList);
+
         resultList.addAll(goldList);
         resultList.addAll(theRestList);
         List<AnnouncementDto> announcementDtos = new ArrayList<>();
@@ -156,21 +159,7 @@ public class AnnouncementController {
     @GetMapping("/{id}")
     @ResponseBody
     public AnnouncementDto getAnnouncementById(@PathVariable("id") Long id) {
-        Announcement announcement = service.getById(id);
-        AnnouncementDto announcementDto = new AnnouncementDto();
-        announcementDto.setId(announcement.getId());
-        announcementDto.setTitle(announcement.getTitle());
-        announcementDto.setImage(announcement.getImage());
-        announcementDto.setDescription(announcement.getDescription());
-        announcementDto.setShortDescription(announcement.getShortDescription());
-        announcementDto.setPublishedDate(announcement.getPublishedDate());
-        announcementDto.setPinned(announcement.isPinned());
-        announcementDto.setApprovedForPublishing(announcement.isApprovedForPublishing());
-        announcementDto.setLink(announcement.getLink());
-        announcementDto.setTags(announcement.getTags());
-        announcementDto.setCompanyId(announcement.getCompanyId());
-        announcementDto.setType(service.getType(announcement.getId()));
-        return announcementDto;
+        return convertToDto(this.service.getById(id));
     }
 
     @GetMapping(value = "approved")
@@ -192,26 +181,14 @@ public class AnnouncementController {
                     theRestList.add(announcement);
             }
         }
+        orderByDate(resultList);
+        orderByDate(goldList);
+        orderByDate(theRestList);
+
         resultList.addAll(goldList);
         resultList.addAll(theRestList);
-        List<AnnouncementDto> announcementDtos = new ArrayList<>();
-        resultList.forEach(announcement -> {
-            AnnouncementDto announcementDto = new AnnouncementDto();
-            announcementDto.setId(announcement.getId());
-            announcementDto.setTitle(announcement.getTitle());
-            announcementDto.setImage(announcement.getImage());
-            announcementDto.setDescription(announcement.getDescription());
-            announcementDto.setShortDescription(announcement.getShortDescription());
-            announcementDto.setPublishedDate(announcement.getPublishedDate());
-            announcementDto.setPinned(announcement.isPinned());
-            announcementDto.setApprovedForPublishing(announcement.isApprovedForPublishing());
-            announcementDto.setLink(announcement.getLink());
-            announcementDto.setTags(announcement.getTags());
-            announcementDto.setCompanyId(announcement.getCompanyId());
-            announcementDto.setType(service.getType(announcement.getId()));
-            announcementDtos.add(announcementDto);
-        });
-        return announcementDtos;
+
+        return convertToListDto(resultList);
     }
 
     @GetMapping(value = "/unapproved")
@@ -222,24 +199,8 @@ public class AnnouncementController {
             if(announcement.isApprovedForPublishing() == false)
                 result.add(announcement);
         }
-        List<AnnouncementDto> announcementDtos = new ArrayList<>();
-        result.forEach(announcement -> {
-            AnnouncementDto announcementDto = new AnnouncementDto();
-            announcementDto.setId(announcement.getId());
-            announcementDto.setTitle(announcement.getTitle());
-            announcementDto.setImage(announcement.getImage());
-            announcementDto.setDescription(announcement.getDescription());
-            announcementDto.setShortDescription(announcement.getShortDescription());
-            announcementDto.setPublishedDate(announcement.getPublishedDate());
-            announcementDto.setPinned(announcement.isPinned());
-            announcementDto.setApprovedForPublishing(announcement.isApprovedForPublishing());
-            announcementDto.setLink(announcement.getLink());
-            announcementDto.setTags(announcement.getTags());
-            announcementDto.setCompanyId(announcement.getCompanyId());
-            announcementDto.setType(service.getType(announcement.getId()));
-            announcementDtos.add(announcementDto);
-        });
-        return announcementDtos;
+
+        return convertToListDto(orderByDate(result));
     }
 
     @GetMapping(value = "/byword/{word}")
@@ -340,9 +301,16 @@ public class AnnouncementController {
             else
                 theRestOfThem.add(announcement);
         }
+        //order the lists by date, separately, cause they represent different groups
+        result = orderByDate(result);
+        goldList = orderByDate(goldList);
+        theRestOfThem = (theRestOfThem);
+
+        //add then togheter
         result.addAll(goldList);
         result.addAll(theRestOfThem);
 
+        //return them
         return result;
     }
 
@@ -411,6 +379,11 @@ public class AnnouncementController {
             dtos.add(convertToDto(announcement));
         });
         return dtos;
+    }
+
+    private List<Announcement> orderByDate(List<Announcement> announcementList){
+        announcementList.sort(Comparator.comparing(Announcement::getPublishedDate).reversed());
+        return announcementList;
     }
 
 
