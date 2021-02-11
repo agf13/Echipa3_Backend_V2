@@ -42,9 +42,9 @@ CREATE TABLE Announcements(
                               approved_for_publishing BOOLEAN NOT NULL,
                               link VARCHAR(200),
                               CONSTRAINT fk_description FOREIGN KEY(description_id) REFERENCES Descriptions(description_id),
-                            CONSTRAINT fk_company FOREIGN KEY(company_id) REFERENCES Companies(company_id),
-                                CONSTRAINT fk_image FOREIGN KEY(image_id) REFERENCES Images(image_id)
-                          );
+                              CONSTRAINT fk_company FOREIGN KEY(company_id) REFERENCES Companies(company_id),
+                              CONSTRAINT fk_image FOREIGN KEY(image_id) REFERENCES Images(image_id)
+);
 
 CREATE TABLE AnnouncementsTags(
                                   announcement_id BIGSERIAL,
@@ -101,35 +101,63 @@ CREATE TABLE Others(
                        CONSTRAINT fk_others FOREIGN KEY(announcement_id) REFERENCES Announcements(announcement_id)
 );
 
+CREATE TABLE Roles(
+                      id BIGSERIAL PRIMARY KEY,
+                      role VARCHAR(100)
+);
+
+INSERT INTO Roles(id, role) VALUES (1, 'ROLE_ADMIN'), (2, 'ROLE_USER');
+
 CREATE TABLE Users(
                       id BIGSERIAL PRIMARY KEY,
                       username VARCHAR(1000),
                       password VARCHAR(1000)
 );
 
+CREATE TABLE users_roles(
+                            user_id BIGSERIAL,
+                            role_id BIGSERIAL,
+                            CONSTRAINT fk_users FOREIGN KEY(user_id) REFERENCES Users(id),
+                            CONSTRAINT fk_roles FOREIGN KEY(role_id) REFERENCES Roles(id)
+);
 
+CREATE TABLE Privileges(
+                           id BIGSERIAL PRIMARY KEY,
+                           privilege VARCHAR(100)
+);
+
+CREATE TABLE roles_privileges(
+                                 role_id BIGSERIAL,
+                                 privilege_id BIGSERIAL,
+                                 CONSTRAINT fk_roles FOREIGN KEY(role_id) REFERENCES Roles(id),
+                                 CONSTRAINT fk_privileges FOREIGN KEY(privilege_id) REFERENCES Privileges(id)
+);
+
+INSERT INTO privileges(id, privilege) VALUES (1, 'ADMIN_PRIVILEGE'), (2, 'USER_PRIVILEGE');
+
+INSERT INTO roles_privileges(role_id, privilege_id) VALUES (1,1), (2,2);
 
 --modifying company table:  removing username and password
 --                          adding telephone, email, isGold
 ALTER TABLE companies
-DROP COLUMN username;
+    DROP COLUMN username;
 
 ALTER TABLE companies
-DROP COLUMN password;
+    DROP COLUMN password;
 
 ALTER TABLE companies
-ADD telephone varchar(20);
+    ADD telephone varchar(20);
 
 ALTER TABLE companies
-ADD email varchar(100);
+    ADD email varchar(100);
 
 ALTER TABLE companies
-ADD is_gold boolean;
+    ADD is_gold boolean;
 
 
 --changeing the field 'importance' form announcements to 'isPinned'
 ALTER TABLE Announcements
-DROP COLUMN importance;
+    DROP COLUMN importance;
 
 ALTER TABLE announcements
-ADD is_pinned boolean
+    ADD is_pinned boolean
