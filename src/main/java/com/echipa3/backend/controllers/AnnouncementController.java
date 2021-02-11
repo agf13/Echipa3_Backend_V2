@@ -247,10 +247,8 @@ public class AnnouncementController {
         List<Announcement> announcementList = new ArrayList<>();
         String word_lowerCase = word.toLowerCase();
         for(Announcement announcement : this.service.getAll()){
-            print(announcement.getTitle());
             if(announcement.getTitle().toLowerCase().contains(word_lowerCase) ||
                 announcement.methodToGetTheCompany().getName().toLowerCase().contains(word_lowerCase)) {
-                print(announcement.getTitle());
                 announcementList.add(announcement);
             }
             else{
@@ -260,7 +258,7 @@ public class AnnouncementController {
                 }
             }
         }
-        print(announcementList);
+        print("initial list" + announcementList.toString());
         return convertToListDto(orderAnnouncements(removeUnapproved(announcementList)));
     }
 
@@ -277,8 +275,8 @@ public class AnnouncementController {
             }
         }
 
-        print(result);
-        return convertToListDto(orderAnnouncements(result));
+        print("initial list: " + result.toString());
+        return convertToListDto(orderAnnouncements(removeUnapproved(result)));
     }
 
     @GetMapping(value = "/bytag/name/{tagName}")
@@ -293,8 +291,8 @@ public class AnnouncementController {
                 }
             }
         }
-        print(result);
-        return convertToListDto(orderAnnouncements(result));
+        print("initial list" + result.toString());
+        return convertToListDto(orderAnnouncements(removeUnapproved(result)));
     }
 
     @GetMapping(value = "/bycompany/id/{companyId}")
@@ -304,9 +302,9 @@ public class AnnouncementController {
             if(announcement.getCompanyId() == companyId)
                 announcementList.add(announcement);
         }
-        announcementList = orderAnnouncements(announcementList);
 
-        return convertToListDto(announcementList);
+        print("initial list: " + announcementList.toString());
+        return convertToListDto(orderAnnouncements(removeUnapproved(announcementList)));
     }
 
     @GetMapping(value = "/bycompany/name/{companyname}")
@@ -317,8 +315,9 @@ public class AnnouncementController {
                 announcementList.add(announcement);
             }
         }
-        announcementList = orderAnnouncements(announcementList);
-        return convertToListDto(announcementList);
+
+        print("intial list: " + announcementList.toString());
+        return convertToListDto(orderAnnouncements(removeUnapproved(announcementList)));
     }
 
 
