@@ -32,4 +32,9 @@ public class ScholarshipController {
         return service.getById(id);
     }
 
+    @PostMapping(value = "/update")
+    public Scholarship updateAnnouncement(@RequestBody Scholarship scholarship){
+        return this.service.saveOrUpdate(scholarship);
+    }
+
 }

@@ -31,4 +31,9 @@ public class OtherController {
     public Other getOtherById(@PathVariable("id") Long id) {
         return service.getById(id);
     }
+
+    @PostMapping(value = "/update")
+    public Other updateAnnouncement(@RequestBody Other other){
+        return this.service.saveOrUpdate(other);
+    }
 }

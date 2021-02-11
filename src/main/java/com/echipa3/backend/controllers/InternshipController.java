@@ -33,4 +33,9 @@ public class InternshipController {
     public Internship getInternshipById(@PathVariable("id") Long id) {
         return service.getById(id);
     }
+
+    @PostMapping(value = "/update")
+    public Internship updateAnnouncement(@RequestBody Internship inter){
+        return this.service.saveOrUpdate(inter);
+    }
 }

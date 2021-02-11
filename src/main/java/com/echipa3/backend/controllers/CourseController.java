@@ -29,4 +29,10 @@ public class CourseController {
     public Course getCourseById(@PathVariable("id") Long id) {
         return service.getById(id);
     }
+
+    @PostMapping(value = "/update")
+    public Course updateAnnouncement(@RequestBody Course contest){
+        return this.service.saveOrUpdate(contest);
+    }
+
 }
