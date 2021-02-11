@@ -26,7 +26,7 @@ public class Tag implements Serializable {
 //    @ManyToMany
 //    private Set<Announcement> announcementList;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "tags")
     private Set<Announcement> announcements;
 
 //    @OneToMany(mappedBy = "")
@@ -66,12 +66,12 @@ public class Tag implements Serializable {
 //        this.announcementTagsList = announcementTagsList;
 //    }
 
+
     @Override
     public String toString() {
         return "Tag{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
-                ", announcements=" + announcements +
                 '}';
     }
 }

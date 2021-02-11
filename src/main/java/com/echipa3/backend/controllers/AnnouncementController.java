@@ -242,6 +242,61 @@ public class AnnouncementController {
         return announcementDtos;
     }
 
+    @GetMapping(value = "/byword/{word}")
+    public List<AnnouncementDto> getByWord(@PathVariable("word") String word){
+        List<Announcement> announcementList = new ArrayList<>();
+        String word_lowerCase = word.toLowerCase();
+        for(Announcement announcement : this.service.getAll()){
+            print(announcement.getTitle());
+            if(announcement.getTitle().toLowerCase().contains(word_lowerCase) ||
+                announcement.methodToGetTheCompany().getName().toLowerCase().contains(word_lowerCase)) {
+                print(announcement.getTitle());
+                announcementList.add(announcement);
+            }
+            else{
+                for(Tag tag : announcement.getTags()){
+                    if(tag.getText().toLowerCase().contains(word_lowerCase))
+                        announcementList.add(announcement);
+                }
+            }
+        }
+        print(announcementList);
+        return convertToListDto(orderAnnouncements(removeUnapproved(announcementList)));
+    }
+
+    @GetMapping(value = "/bytag/id/{id}")
+    public List<AnnouncementDto> getByTagId(@PathVariable("id") Long tagId){
+//        List<Announcement> announcementList = new ArrayList<>();
+        List<Announcement> result = new ArrayList<>();
+        for(Announcement announcement : this.service.getAll()){
+            for(Tag tag : announcement.getTags()){
+                if(tag.getId() == tagId) {
+                    result.add(announcement);
+                    break;
+                }
+            }
+        }
+
+        print(result);
+        return convertToListDto(orderAnnouncements(result));
+    }
+
+    @GetMapping(value = "/bytag/name/{tagName}")
+    public List<AnnouncementDto> getByTagName(@PathVariable("tagName") String tagName){
+//        List<Announcement> announcementList = new ArrayList<>();
+        List<Announcement> result = new ArrayList<>();
+        for(Announcement announcement : this.service.getAll()){
+            for(Tag tag : announcement.getTags()){
+                if(tag.getText().toLowerCase().contains(tagName.toLowerCase())) {
+                    result.add(announcement);
+                    break;
+                }
+            }
+        }
+        print(result);
+        return convertToListDto(orderAnnouncements(result));
+    }
+
     @GetMapping(value = "/bycompany/id/{companyId}")
     public List<AnnouncementDto> getByCompany(@PathVariable("companyId") Long companyId){
         List<Announcement> announcementList = new ArrayList<>();
@@ -290,6 +345,11 @@ public class AnnouncementController {
         result.addAll(theRestOfThem);
 
         return result;
+    }
+
+    private List<Announcement> removeUnapproved(List<Announcement> announcementList){
+        announcementList.removeIf(announcement -> announcement.isApprovedForPublishing()==false);
+        return announcementList;
     }
 
     private AnnouncementDto convertToDto(Announcement announcement){
@@ -352,5 +412,12 @@ public class AnnouncementController {
             dtos.add(convertToDto(announcement));
         });
         return dtos;
+    }
+
+
+
+    private String print(Object obj){
+        System.out.println(obj.toString());
+        return obj.toString();
     }
 }
