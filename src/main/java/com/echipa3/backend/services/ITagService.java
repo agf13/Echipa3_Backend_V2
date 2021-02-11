@@ -9,6 +9,10 @@ public interface ITagService {
 
     public Tag getById(Long id);
 
+    public Tag findTagByText(String text);
+
+    public boolean isTagText(String text);
+
     public Tag saveOrUpdate(Tag tag);
 
     public void delete(Long id);
