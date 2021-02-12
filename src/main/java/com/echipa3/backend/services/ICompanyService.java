@@ -13,5 +13,7 @@ public interface ICompanyService {
 
     public Company saveOrUpdate(Company company);
 
+    public Company setGold(Long id, boolean isGold);
+
     public void delete(Long id);
 }

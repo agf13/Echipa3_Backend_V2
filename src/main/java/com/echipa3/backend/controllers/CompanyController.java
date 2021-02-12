@@ -5,6 +5,7 @@ import com.echipa3.backend.entities.Company;
 import com.echipa3.backend.services.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,16 @@ public class CompanyController {
     @PostMapping()
     public Company save(@RequestBody Company company){
         return service.saveOrUpdate(company);
+    }
+
+    @PostMapping(value = "/goldit/{id}")
+    public Company goldIt(@PathVariable("id") Long id){
+        return this.service.setGold(id, true);
+    }
+
+    @PostMapping(value = "/ungoldit/{id}")
+    public Company unGoldIt(@PathVariable("id") Long id){
+        return this.service.setGold(id, false);
     }
 
     @GetMapping(value = "/get")

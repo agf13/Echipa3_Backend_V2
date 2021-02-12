@@ -39,6 +39,13 @@ public class CompanyServiceImpl implements ICompanyService{
     }
 
     @Override
+    public Company setGold(Long id, boolean isGold) {
+        Company company = repository.findById(id).get();
+        company.setIs_gold(isGold);
+        return company;
+    }
+
+    @Override
     public void delete(Long id) {
         repository.deleteById(id);
     }
