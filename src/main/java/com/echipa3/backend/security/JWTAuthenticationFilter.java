@@ -58,8 +58,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
-        res.addHeader("Access-Control-Expose-Headers", "Authorization, Role");
+        res.addHeader("Access-Control-Expose-Headers", "Authorization, Role, Id");
         res.addHeader("Role", ((User) auth.getPrincipal()).getAuthorities().toString());
-
     }
 }
