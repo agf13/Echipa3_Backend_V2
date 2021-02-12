@@ -1,6 +1,5 @@
 package com.echipa3.backend.security;
 
-import com.echipa3.backend.entities.ApplicationUser;
 import com.echipa3.backend.entities.Privilege;
 import com.echipa3.backend.entities.Role;
 import com.echipa3.backend.repositories.IRepoPrivilege;
@@ -54,12 +53,14 @@ public class SetupDataLoader implements
         /*
         DELETE AFTER FIRST RUN
          */
+        /*
         Role adminRole = roleRepository.findByRole("ROLE_ADMIN");
         ApplicationUser user = new ApplicationUser();
         user.setUsername("admin");
         user.setPassword(passwordEncoder.encode("admin"));
         user.setRoles(Arrays.asList(adminRole));
         userRepository.save(user);
+        */
         /*
         DELETE AFTER FIRST RUN
          */
