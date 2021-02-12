@@ -31,7 +31,7 @@ public class UserController {
         this.roleRepository = repoRole;
     }
 
-    @GetMapping
+    @PostMapping
     public Long getId(@RequestBody UsernameDto username){
         ApplicationUser user = userService.getByUsername(username.getUsername());
         return user.getId();
