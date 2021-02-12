@@ -265,7 +265,7 @@ public class AnnouncementController {
         }
 
         print("initial list: " + announcementList.toString());
-        return convertToListDto(orderAnnouncements(removeUnapproved(announcementList)));
+        return convertToListDto(orderAnnouncements(announcementList));
     }
 
     @GetMapping(value = "/bycompany/name/{companyname}")
